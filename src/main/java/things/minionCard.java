@@ -1,55 +1,15 @@
 package things;
 
-public class minionCard {
-
-	private String cardName;
-	private int manaCost;
-	private String text;
+public class MinionCard extends Card{
 	private int attackPower;
-	private int healthPower;
+	private int healthPoint;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-	public minionCard(String cardName, int manaCost, String text, int attackPower, int healthPower) {
-		this.cardName = cardName;
-		this.manaCost = manaCost;
-		this.text = text;
+	public MinionCard(String cardName, int manaCost, String text, int attackPower, int healthPoint) {
+		super(cardName, manaCost, text);
 		this.attackPower = attackPower;
-		this.healthPower = healthPower;
+		this.healthPoint = healthPoint;
 	}
 
-	public String getCardName() {
-		return cardName;
-	}
-
-	public void setCardName(String cardName) {
-		this.cardName = cardName;
-	}
-
-	public int getManaCost() {
-		return manaCost;
-	}
-
-	public void setManaCost(int manaCost) {
-		this.manaCost = manaCost;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
 
 	public int getAttackPower() {
 		return attackPower;
@@ -59,12 +19,14 @@ public class minionCard {
 		this.attackPower = attackPower;
 	}
 
-	public int getHealthPower() {
-		return healthPower;
+	public int getHealthPoint() {
+		return healthPoint;
 	}
 
-	public void setHealthPower(int healthPower) {
-		this.healthPower = healthPower;
+	public void setHealthPoint(int healthPoint) {
+		this.healthPoint = healthPoint;
 	}
+	
+	
 
 }

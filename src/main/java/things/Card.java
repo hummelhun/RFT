@@ -5,12 +5,10 @@ public class Card {
 	private int manaCost;
 	private String text;
 	
-	
-
-	
-	
-	public Card(String cardName, int manaCost, String text) {
+	public Card() {
 		super();
+	}
+	public Card(String cardName, int manaCost, String text) {
 		this.cardName = cardName;
 		this.manaCost = manaCost;
 		this.text = text;

@@ -24,7 +24,6 @@ public class ServerMain {
 		server.createServerSocket();
 		server.createClientSocket1();
 		server.Client1InOut();
-	
 			System.out.println("Client connected on port " + server.getPortNumber() + ". Servicing requests.");
 			String inputLine;
 			while ((inputLine = server.in1.readLine()) != null) {

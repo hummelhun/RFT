@@ -4,8 +4,8 @@ public class MinionCard extends Card{
 	private int attackPower;
 	private int healthPoint;
 	
-	public MinionCard(String cardName, int manaCost, String text, int attackPower, int healthPoint) {
-		super(cardName, manaCost, text);
+	public MinionCard(String cardName, int manaCost, String text, String fileName, int attackPower, int healthPoint) {
+		super(cardName, manaCost, text, fileName);
 		this.attackPower = attackPower;
 		this.healthPoint = healthPoint;
 	}

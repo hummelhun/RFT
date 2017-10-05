@@ -24,8 +24,12 @@ public class ServerMain {
 		server.createServerSocket();
 		server.createClientSocket1();
 		server.Client1InOut();
-			System.out.println("Client connected on port " + server.getPortNumber() + ". Servicing requests.");
-			String inputLine;
+			System.out.println("Client 1 connected on port " + server.getPortNumber() + ". Servicing requests.");
+		server.createClientSocket2();
+		server.Client2InOut();
+		    System.out.println("Client 2 connected on port " + server.getPortNumber() + ". Servicing requests.");
+		
+		    String inputLine;			
 			while ((inputLine = server.in1.readLine()) != null) {
 				System.out.println("Received message: " + inputLine + " from " + server.clientSocket1.toString());
 				server.out1.println(inputLine);

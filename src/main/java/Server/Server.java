@@ -50,6 +50,15 @@ public class Server {
 		}
 	}
 	
+	public void createClientSocket2(){
+		try {
+			this.clientSocket2 = this.serverSocket.accept();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	public int getPortNumber() {
 		return portNumber;
 	}

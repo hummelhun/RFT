@@ -1,4 +1,4 @@
-package Server;
+package Server.deprecated;
 
 import java.io.BufferedReader;
 import java.io.IOException;

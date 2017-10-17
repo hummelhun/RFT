@@ -4,7 +4,7 @@ import things.Player;
 
 public class Core {
 
-	public Core() {		
+	public Core() {	
 	}
 	
 	private Player player1;

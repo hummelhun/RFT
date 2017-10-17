@@ -24,13 +24,17 @@ public class MainMenuController {
 	public void initData(Core core)	{
 		this.c = core;		
 	}
+	
 	@FXML
 	private void handleNewGame() {
-		System.out.println("New GAme ASD");
+		System.out.println("New GAme Started");
+		this.main.createGameTable(c);
 	}
 	
-	
-	
-	
+	@FXML
+	private void handleExitGame() {
+		System.exit(0);
+	}
+		
 
 }

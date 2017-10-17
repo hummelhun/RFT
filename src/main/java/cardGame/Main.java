@@ -5,12 +5,13 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import cardGame.*;
 import things.MinionCard;
 import things.Player;
 import things.SpellCard;
+import view.GameTableController;
 import view.MainMenuController;
 
 
@@ -47,8 +48,8 @@ public class Main extends Application{
 			Scene scene = new Scene(mainMenu);
 
 			MainMenuController controller = loader.getController();
-//			controller.initData(core);
-//			controller.setMain(this);
+			controller.initData(core);
+			controller.setMain(this);
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
@@ -57,8 +58,24 @@ public class Main extends Application{
 		}
 	}
 	
+	public void createGameTable(Core core) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(Main.class.getResource("/fxml/GameTable.fxml"));
+			AnchorPane pane;
+			pane = (AnchorPane) loader.load();
 
-	
+			mainMenu.setCenter(pane);
+
+			GameTableController controller = loader.getController();
+			controller.initData(core);
+			controller.setMain(this);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 	public static void main(String[] args) {
 		MinionCard card1 = new MinionCard("Bloodfen Raptor", 2, "", "bloodfenraptor.png",3, 2);
 		System.out.println(card1.getCardName());

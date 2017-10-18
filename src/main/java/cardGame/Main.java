@@ -44,9 +44,7 @@ public class Main extends Application{
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(Main.class.getResource("/fxml/MainMenu.fxml"));
 			mainMenu = (BorderPane) loader.load();
-
 			Scene scene = new Scene(mainMenu);
-
 			MainMenuController controller = loader.getController();
 			controller.initData(core);
 			controller.setMain(this);
@@ -64,9 +62,7 @@ public class Main extends Application{
 			loader.setLocation(Main.class.getResource("/fxml/GameTable.fxml"));
 			AnchorPane pane;
 			pane = (AnchorPane) loader.load();
-
 			mainMenu.setCenter(pane);
-
 			GameTableController controller = loader.getController();
 			controller.initData(core);
 			controller.setMain(this);
@@ -77,15 +73,12 @@ public class Main extends Application{
 	}
 
 	public static void main(String[] args) {
-		MinionCard card1 = new MinionCard("Bloodfen Raptor", 2, "", "bloodfenraptor.png",3, 2);
-		System.out.println(card1.getCardName());
-		SpellCard card2 = new SpellCard("Arcane Intellect", 3, "Draw 2 card", "arcaneintellect.png");
-		System.out.println(card2.getCardName());
-		MinionCard[] deck1 = new MinionCard[2];
-		deck1[0]= card1;
-		deck1[1]= card1;
-		
-		Player player1 = new Player("player1", deck1, 0) ;
+//		MinionCard card1 = new MinionCard("Bloodfen Raptor", 2, "", "Bloodfen_Raptor.png",3, 2);
+//		System.out.println(card1.getCardName());
+//		SpellCard card2 = new SpellCard("Arcane Intellect", 3, "Draw 2 card", "arcaneintellect.png");
+//		System.out.println(card2.getCardName());
+		System.out.println();
+
 		launch(args);
 		
 	}

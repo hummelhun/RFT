@@ -9,11 +9,128 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.GameTableController">
    <children>
-      <Pane prefHeight="800.0" prefWidth="1200.0">
+      <Pane prefHeight="900.0" prefWidth="1440.0">
          <children>
-            <Button fx:id="gomb" layoutX="64.0" layoutY="33.0" mnemonicParsing="false" text="Button" />
-            <ImageView fx:id="kartya1" fitHeight="258.0" fitWidth="394.0" layoutX="129.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true"/>
-         </children>
-      </Pane>
+            <ImageView fitHeight="200.0" fitWidth="210.0" layoutX="583.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="Jaina_Proudmoore.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ownHand4" fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="816.0" onMouseEntered="#feltolOH4" onMouseExited="#letolOH4" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ownHand3" fitHeight="140.0" fitWidth="120.0" layoutX="583.0" layoutY="816.0" onMouseEntered="#feltolOH3" onMouseExited="#letolOH3" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ownHand1" fitHeight="140.0" fitWidth="120.0" layoutX="253.0" layoutY="816.0" onMouseClicked="#megvaltoztat" onMouseEntered="#feltolOH1" onMouseExited="#letolOH1" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ownHand2" fitHeight="140.0" fitWidth="120.0" layoutX="418.0" layoutY="816.0" onMouseEntered="#feltolOH2" onMouseExited="#letolOH2" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ownHand5" fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="816.0" onMouseEntered="#feltolOH5" onMouseExited="#letolOH5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="583.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="418.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="253.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="200.0" fitWidth="210.0" layoutX="583.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="Jaina_Proudmoore.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="cardback_0.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
    </children>
 </AnchorPane>

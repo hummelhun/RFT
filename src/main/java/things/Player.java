@@ -1,11 +1,14 @@
 package things;
 
+import java.util.List;
+
 public class Player {
 	private String name;
-	private MinionCard[] hand;
+	private List<MinionCard> hand;
+	private List<MinionCard> deck;	
 	private int mana;
 	
-	public Player(String name, MinionCard[] hand, int mana) {
+	public Player(String name, List<MinionCard> hand, int mana) {
 		super();
 		this.name = name;
 		this.hand = hand;
@@ -20,11 +23,11 @@ public class Player {
 		this.name = name;
 	}
 
-	public MinionCard[] getHand() {
+	public List<MinionCard> getHand() {
 		return hand;
 	}
 
-	public void setHand(MinionCard[] hand) {
+	public void setHand(List<MinionCard> hand) {
 		this.hand = hand;
 	}
 
@@ -34,6 +37,14 @@ public class Player {
 
 	public void setMana(int mana) {
 		this.mana = mana;
+	}
+
+	public List<MinionCard> getDeck() {
+		return deck;
+	}
+
+	public void setDeck(List<MinionCard> deck) {
+		this.deck = deck;
 	}
 	
 	

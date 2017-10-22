@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-	
+
 	public ServerSocket getServerSocket() {
 		return serverSocket;
 	}
@@ -18,25 +18,26 @@ public class Server {
 	ServerSocket serverSocket;
 	Socket clientSocket;
 
-	public Server(int p){
+	public Server(int p) {
 		this.portNumber = p;
 	}
-	public Server(){
-		
+
+	public Server() {
+
 	}
-	
+
 	public void createServerSocket() throws IOException {
-			this.serverSocket = new ServerSocket(portNumber);
+		this.serverSocket = new ServerSocket(portNumber);
 	}
-	
-	public void createClientSocket(){
+
+	public void createClientSocket() {
 		try {
 			this.clientSocket = this.serverSocket.accept();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public int getPortNumber() {
 		return portNumber;
 	}

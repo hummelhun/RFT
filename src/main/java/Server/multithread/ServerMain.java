@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+ 
 public class ServerMain {
 	public static void main(String[] args) throws IOException {
 		System.out.println("Start of main");
@@ -15,6 +16,8 @@ public class ServerMain {
 		}
 
 		Server server = new Server(Integer.parseInt(args[0]));
+		MessageQue message = new MessageQue();
+		
 		ExecutorService executor = null;
 		try {
 			server.createServerSocket();
@@ -22,9 +25,10 @@ public class ServerMain {
 			System.out.println("Waiting for clients");
 			while (true) {
 				server.createClientSocket();
-				Runnable worker = new RequestHandler(server.getClientSocket(), server);
+				Runnable worker = new RequestHandler(server.getClientSocket(), server, message);
 				executor.execute(worker);
-				System.out.println("asd!");
+				
+				
 			}
 		} catch (IOException e) {
 			System.out.println(

@@ -14,12 +14,15 @@ public class RequestHandler implements Runnable {
 	private Socket client;
 	ServerSocket serverSocket = null;
 	Server server = new Server();
+	MessageQue message;
 	BufferedReader in;
 	BufferedWriter writer;
+	String userInput;
 
-	public RequestHandler(Socket client, Server server) {
+	public RequestHandler(Socket client, Server server, MessageQue message) {
 		this.client = client;
 		this.server = server;
+		this.message = message;
 	}
 
 	@Override
@@ -28,19 +31,27 @@ public class RequestHandler implements Runnable {
 			writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 			in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			System.out.println("Thread started with name:" + Thread.currentThread().getName());
-			String userInput;
 			while ((userInput = in.readLine()) != null) {
 				userInput = userInput.replaceAll("[^A-Za-z0-9 ]", "");
 				System.out.println("Received message from " + Thread.currentThread().getName() + " : " + userInput);
+				writer.write("message from:"+ message.getWho() + "message:" + message.getMessage());
+				writer.newLine();
+				messageChange();
 				writer.write("You entered : " + userInput);
 				writer.newLine();
 				writer.flush();
+				
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+	public MessageQue messageChange(){
+		message.setWho(client.toString());
+		message.setMessage(userInput);
+		return message;
 	}
 
 }

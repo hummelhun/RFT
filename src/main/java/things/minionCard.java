@@ -3,11 +3,13 @@ package things;
 public class MinionCard extends Card{
 	private int attackPower;
 	private int healthPoint;
+	private int attackNow;
 	
-	public MinionCard(String cardName, int manaCost, String text, String fileName, int attackPower, int healthPoint) {
+	public MinionCard(String cardName, int manaCost, String text, String fileName, int attackPower, int healthPoint, int attackNow) {
 		super(cardName, manaCost, text, fileName);
 		this.attackPower = attackPower;
 		this.healthPoint = healthPoint;
+		this.attackNow= attackNow;
 	}
 
 
@@ -25,6 +27,16 @@ public class MinionCard extends Card{
 
 	public void setHealthPoint(int healthPoint) {
 		this.healthPoint = healthPoint;
+	}
+
+
+	public int isAttackNow() {
+		return attackNow;
+	}
+
+
+	public void setAttackNow(int attackNow) {
+		this.attackNow = attackNow;
 	}
 	
 	

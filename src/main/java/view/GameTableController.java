@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import things.MinionCard;
 
@@ -18,17 +19,32 @@ public class GameTableController {
 	
 	private Stage stage;
 //	public Image hatlap = new Image("cardback_0.png");
-	public ObservableList<MinionCard> pakli1 = FXCollections.observableArrayList();
-	public MinionCard card1 = new MinionCard("Bloodfen Raptor", 2, "", "Bloodfen_Raptor.png",3, 2);
+//	public ObservableList<MinionCard> pakli1 = FXCollections.observableArrayList();
+//	public ObservableList<MinionCard> hand1 = FXCollections.observableArrayList();
+//	public MinionCard bloodfenRaptor = new MinionCard("Bloodfen Raptor", 2, "", "Bloodfen_Raptor.png",3, 2, 0);
+//	public MinionCard murlocRaider = new MinionCard("Murloc Raider", 1, "", "Murloc_Raider.png", 2, 1, 0);
 	
+	@FXML
 	public void startGame() {
-		pakli1.add(card1);
-		pakli1.add(card1);
-		pakli1.add(card1);
+		c.startGame();
+		player1HealtText.setText(""+c.getPlayer1().getHealtPoint());
+		player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
+		manaBar1.setText("Mana: "+c.getPlayer1().getActualMana()+"/ "+c.getPlayer1().getMana());
+		manaBar2.setText("Mana: "+c.getPlayer2().getActualMana()+"/ "+c.getPlayer2().getMana());
+		c.getPlayer1().getHand().get(0).getFileName();
+		Image image = new Image(c.getPlayer1().getHand().get(0).getFileName());
+		ownHand1.setImage(image);
+		Image image2 = new Image(c.getPlayer1().getHand().get(1).getFileName());
+		ownHand2.setImage(image2);
+		Image image3 = new Image(c.getPlayer1().getHand().get(2).getFileName());
+		ownHand3.setImage(image3);
+		
+		startButton.setVisible(false);
+		ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
+		ownDeckCounter2.setText("Cards left: "+c.getPlayer2().getDeck().size());
+		
 	}
-	
-	public void 
-	
+
 	
 	@FXML
 	public ImageView ownHand1;
@@ -40,8 +56,27 @@ public class GameTableController {
 	public ImageView ownHand4;
 	@FXML
 	public ImageView ownHand5;
+	@FXML 
+	public Text ownDeckCounter; 
+	@FXML 
+	public Text ownDeckCounter2;
 	
 	public Image bloodfen = new Image("Bloodfen_Raptor.png");
+	
+	@FXML
+	Button startButton = new Button();
+	
+	@FXML
+	Text player1HealtText;
+	
+	@FXML
+	Text player2HealtText;
+	
+	@FXML
+	Text manaBar1;
+	
+	@FXML
+	Text manaBar2;
 	
 	@FXML
 	public void megvaltoztat() {
@@ -130,4 +165,6 @@ public class GameTableController {
 		
 		
 	}
+	
+	
 }

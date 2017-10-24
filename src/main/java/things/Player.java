@@ -7,14 +7,26 @@ public class Player {
 	private List<MinionCard> hand;
 	private List<MinionCard> deck;	
 	private int mana;
+	private int actualMana;
+	private int healtPoint;
 	
-	public Player(String name, List<MinionCard> hand, int mana) {
+	public Player(String name, List<MinionCard> hand, List<MinionCard> deck, int mana, int actualMana, int healthPoint) {
 		super();
 		this.name = name;
 		this.hand = hand;
+		this.deck = deck;
 		this.mana = mana;
+		this.actualMana = actualMana;
+		this.healtPoint = healthPoint;
 	}
-
+	
+	public void addCardToHand(MinionCard card) {
+		hand.add(card);
+	}
+	public void removeCardFromDeck(int index) {
+		deck.remove(index);
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -45,6 +57,22 @@ public class Player {
 
 	public void setDeck(List<MinionCard> deck) {
 		this.deck = deck;
+	}
+
+	public int getHealtPoint() {
+		return healtPoint;
+	}
+
+	public void setHealtPoint(int healtPoint) {
+		this.healtPoint = healtPoint;
+	}
+
+	public int getActualMana() {
+		return actualMana;
+	}
+
+	public void setActualMana(int actualMana) {
+		this.actualMana = actualMana;
 	}
 	
 	

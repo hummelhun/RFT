@@ -19,10 +19,12 @@ public class ClientMain {
 			client.createClientSocket();
 			client.clientInOut();
 			client.clientStdIn();
-			while ((client.userInput = client.stdIn.readLine()) != null) {
+			/*while ((client.userInput = client.stdIn.readLine()) != null) {
 				client.out.println(client.userInput);
 				System.out.println("echo: " + client.in.readLine());
-			}
+			}*/
+		
+			
 		} catch (UnknownHostException e) {
 			System.err.println("Don't know about host " + client.getHostname());
 			System.exit(1);
@@ -30,6 +32,21 @@ public class ClientMain {
 			System.err.println("Couldn't get I/O for the connection to " + client.getHostname());
 			System.exit(1);
 		}
+	
+        Sender sender = new Sender(client.getOut());
+        sender.setDaemon(true);
+        sender.start();
+ 
+        try {
+           // Read messages from the server and print them
+            String message;
+           while ((message=client.in.readLine()) != null) {
+               System.out.println(message);
+           }
+        } catch (IOException ioe) {
+           System.err.println("Connection to server broken.");
+           ioe.printStackTrace();
+        }
 
 	}
 

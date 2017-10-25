@@ -14,12 +14,12 @@ public class RequestHandler implements Runnable {
 	private Socket client;
 	ServerSocket serverSocket = null;
 	Server server = new Server();
-	MessageQue message;
+	ServerDispatcher message;
 	BufferedReader in;
 	BufferedWriter writer;
 	String userInput;
 
-	public RequestHandler(Socket client, Server server, MessageQue message) {
+	public RequestHandler(Socket client, Server server, ServerDispatcher message) {
 		this.client = client;
 		this.server = server;
 		this.message = message;
@@ -34,9 +34,9 @@ public class RequestHandler implements Runnable {
 			while ((userInput = in.readLine()) != null) {
 				userInput = userInput.replaceAll("[^A-Za-z0-9 ]", "");
 				System.out.println("Received message from " + Thread.currentThread().getName() + " : " + userInput);
-				writer.write("message from:"+ message.getWho() + "message:" + message.getMessage());
+				//writer.write("message from:"+ message.getWho() + "message:" + message.getMessage());
 				writer.newLine();
-				messageChange();
+				//messageChange();
 				writer.write("You entered : " + userInput);
 				writer.newLine();
 				writer.flush();
@@ -48,10 +48,10 @@ public class RequestHandler implements Runnable {
 		}
 
 	}
-	public MessageQue messageChange(){
+	/*public ServerDispatcher messageChange(){
 		message.setWho(client.toString());
 		message.setMessage(userInput);
 		return message;
-	}
+	}*/
 
 }

@@ -15,10 +15,38 @@ public class ServerMain {
 			System.exit(1);
 		}
 
-		Server server = new Server(Integer.parseInt(args[0]));
-		MessageQue message = new MessageQue();
-		
-		ExecutorService executor = null;
+		ServerSocket serverSocket = null;
+		try {
+			Server server = new Server(Integer.parseInt(args[0]));
+			server.createServerSocket();
+			serverSocket = server.getServerSocket();
+		}catch (IOException e) {
+			System.out.println(
+					"Exception caught when trying to listen on port " + args[0] + " or listening for a connection");
+			System.out.println(e.getMessage());
+		}
+		   ServerDispatcher serverDispatcher = new ServerDispatcher();
+	        serverDispatcher.start();
+	        
+	        while (true) {
+	            try {
+	                Socket socket = serverSocket.accept();
+	                ClientInfo clientInfo = new ClientInfo();
+	                clientInfo.mSocket = socket;
+	                ClientListener clientListener =
+	                    new ClientListener(clientInfo, serverDispatcher);
+	                ClientSender clientSender =
+	                    new ClientSender(clientInfo, serverDispatcher);
+	                clientInfo.mClientListener = clientListener;
+	                clientInfo.mClientSender = clientSender;
+	                clientListener.start();
+	                clientSender.start();
+	                serverDispatcher.addClient(clientInfo);
+	            } catch (IOException ioe) {
+	                ioe.printStackTrace();
+	            }
+	         }
+		/*ExecutorService executor = null;
 		try {
 			server.createServerSocket();
 			executor = Executors.newFixedThreadPool(5);
@@ -38,7 +66,7 @@ public class ServerMain {
 			if (executor != null) {
 				executor.shutdown();
 			}
-		}
+		}*/
 
 	}
 }

@@ -20,32 +20,45 @@
             <Line endX="100.0" layoutX="1028.0" layoutY="431.0" rotate="90.0" scaleX="3.0" startX="-100.0" />
             <Line endX="100.0" layoutX="697.0" layoutY="431.0" rotate="90.0" scaleX="2.0" startX="-100.0" />
             <Line endX="100.0" layoutX="856.0" layoutY="439.0" rotate="90.0" scaleX="3.0" startX="-100.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="219.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="383.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="548.0" layoutY="285.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="713.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="878.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="1043.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="219.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="383.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="548.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="713.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="878.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="1043.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Button fx:id="startButton" layoutX="1310.0" layoutY="845.0" mnemonicParsing="false" onAction="#startGame" prefHeight="55.0" prefWidth="130.0" text="Start" />
             <ImageView fitHeight="200.0" fitWidth="210.0" layoutX="583.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="Jaina_Proudmoore.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownHand4" fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="816.0" onMouseEntered="#feltolOH4" onMouseExited="#letolOH4" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownHand4" fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand4" onMouseEntered="#feltolOH4" onMouseExited="#letolOH4" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownHand3" fitHeight="140.0" fitWidth="120.0" layoutX="583.0" layoutY="816.0" onMouseEntered="#feltolOH3" onMouseExited="#letolOH3" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownHand3" fitHeight="140.0" fitWidth="120.0" layoutX="583.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand3" onMouseEntered="#feltolOH3" onMouseExited="#letolOH3" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownHand1" fitHeight="140.0" fitWidth="120.0" layoutX="253.0" layoutY="816.0" onMouseClicked="#megvaltoztat" onMouseEntered="#feltolOH1" onMouseExited="#letolOH1" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownHand1" fitHeight="140.0" fitWidth="120.0" layoutX="253.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand1" onMouseEntered="#feltolOH1" onMouseExited="#letolOH1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownHand2" fitHeight="140.0" fitWidth="120.0" layoutX="418.0" layoutY="816.0" onMouseEntered="#feltolOH2" onMouseExited="#letolOH2" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownHand2" fitHeight="140.0" fitWidth="120.0" layoutX="418.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand2" onMouseEntered="#feltolOH2" onMouseExited="#letolOH2" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownHand5" fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="816.0" onMouseEntered="#feltolOH5" onMouseExited="#letolOH5" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownHand5" fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand5" onMouseEntered="#feltolOH5" onMouseExited="#letolOH5" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
@@ -80,32 +93,32 @@
                   <Image url="Uther_Lightbringer.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard5" fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard3" fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard6" fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard1" fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard4" fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard2" fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
@@ -120,7 +133,7 @@
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="220.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
@@ -140,9 +153,7 @@
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <Button fx:id="startButton" layoutX="1310.0" layoutY="845.0" mnemonicParsing="false" onAction="#startGame" prefHeight="55.0" prefWidth="130.0" text="Start" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="147.0" layoutX="222.0" layoutY="278.0" stroke="#e10000" strokeType="INSIDE" width="114.0" />
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1293.0" layoutY="645.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1296.0" layoutY="645.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
@@ -152,14 +163,13 @@
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <Text layoutX="1336.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Text fx:id="ownDeckCounter" layoutX="1336.0" layoutY="811.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Text fx:id="player1HealtText" layoutX="780.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="49.6708984375" />
-            <Text fx:id="player2HealtText" layoutX="755.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="49.6708984375" />
-            <Text fx:id="ownDeckCounter2" layoutX="1336.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-            <Button layoutX="1277.0" layoutY="426.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="130.0" text="End Turn" />
-            <Text fx:id="manaBar1" layoutX="1100.0" layoutY="829.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="130.0" />
-            <Text fx:id="manaBar2" layoutX="1100.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="130.0" />
+            <Text fx:id="ownDeckCounter" layoutX="1303.0" layoutY="801.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Own CC" wrappingWidth="100.0" />
+            <Text fx:id="player1HealtText" layoutX="780.0" layoutY="780.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OwnHP" wrappingWidth="100.0" />
+            <Text fx:id="player2HealtText" layoutX="755.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OpponentHP" wrappingWidth="100.0" />
+            <Text fx:id="ownDeckCounter2" layoutX="1303.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opponent CC" wrappingWidth="100.0" />
+            <Button layoutX="1277.0" layoutY="426.0" mnemonicParsing="false" onAction="#endTurnButton" prefHeight="47.0" prefWidth="130.0" text="End Turn" />
+            <Text fx:id="manaBar1" layoutX="1100.0" layoutY="829.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana/Mana" wrappingWidth="130.0" />
+            <Text fx:id="manaBar2" layoutX="1100.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana/Mana" wrappingWidth="130.0" />
          </children></Pane>
    </children>
 </AnchorPane>

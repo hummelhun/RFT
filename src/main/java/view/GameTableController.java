@@ -15,11 +15,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import things.MinionCard;
+import things.Player;
 
 public class GameTableController {
 	
 	private Stage stage;
 	public Image hatlap = new Image("cardback_0.png");
+	public int choose1;
+
 	
 	
 	public void refreshTheHandImages() {
@@ -29,6 +32,18 @@ public class GameTableController {
 		}
 	    for (int i = c.getPlayer1().getHand().size(); i < 5; i++) {
 	    	handImgs[i].setImage(hatlap);
+//	    	handImgs[i].setOpacity(0);
+		}
+	}
+	
+	public void refreshBoardImages(Player player, ImageView[] imagearray) {
+		for (int i = 0; i < player.getBoard().size(); i++) {
+			Image img = new Image(player.getBoard().get(i).getFileName());
+			boardImgsOpponent[i].setImage(img);
+		}
+		for (int i = player.getBoard().size(); i < 6; i++) {
+			
+			imagearray[i].setImage(hatlap);
 		}
 	}
 	
@@ -63,8 +78,19 @@ public class GameTableController {
 		boardImgs[3]=ownBoard4;
 		boardImgs[4]=ownBoard5;
 		boardImgs[5]=ownBoard6;
+		
+		boardImgsOpponent[0]=opponentBoard1;
+		boardImgsOpponent[1]=opponentBoard2;
+		boardImgsOpponent[2]=opponentBoard3;
+		boardImgsOpponent[3]=opponentBoard4;
+		boardImgsOpponent[4]=opponentBoard5;
+		boardImgsOpponent[5]=opponentBoard6;
+		
+		
+		refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
 	
 	}
+	
 	
 	@FXML
 	public void endTurnButton() {
@@ -86,9 +112,12 @@ public class GameTableController {
 				c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
 				c.getPlayer1().getDeck().remove(0);
 				ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
+				
 				refreshTheHandImages();
 			}	
 		}
+		
+		
 		
 	}
 	
@@ -194,6 +223,58 @@ public class GameTableController {
 	}
 	
 	@FXML
+	public void clickOnBoard1() {
+		choose1=0;
+	}
+	@FXML
+	public void clickOnBoard2() {
+		choose1=1;
+	}
+	@FXML
+	public void clickOnBoard3() {
+		choose1=2;
+	}
+	@FXML
+	public void clickOnBoard4() {
+		choose1=3;
+	}
+	@FXML
+	public void clickOnBoard5() {
+		choose1=4;
+	}
+	@FXML
+	public void clickOnBoard6() {
+		choose1=5;
+	}
+	
+	@FXML
+	public void clickOnOpponentBoard1() {
+		c.getPlayer1().getBoard().get(choose1).setHealthPoint(c.getPlayer1().getBoard().get(choose1).getHealthPoint()-c.getPlayer2().getBoard().get(0).getAttackPower());
+		c.getPlayer2().getBoard().get(0).setHealthPoint(c.getPlayer2().getBoard().get(0).getHealthPoint()-c.getPlayer1().getBoard().get(choose1).getAttackPower());
+		for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
+			if (c.getPlayer1().getBoard().get(i).getHealthPoint()<=0) {
+				c.getPlayer1().getBoard().remove(i);
+				
+			}
+		}
+		for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
+			if (c.getPlayer2().getBoard().get(i).getHealthPoint()<=0) {
+				c.getPlayer2().getBoard().remove(i);
+				
+			}
+		}
+		refreshBoardImages(c.getPlayer1(),boardImgs);
+		refreshBoardImages(c.getPlayer2(),boardImgsOpponent);
+		
+		
+	}
+	@FXML
+	public void clickOnOpponentFace() {
+		c.getPlayer2().setHealtPoint(c.getPlayer2().getHealtPoint()-c.getPlayer1().getBoard().get(choose1).getAttackPower());
+		player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
+	}
+	
+	@FXML
 	public ImageView ownHand1;
 	@FXML
 	public ImageView ownHand2;
@@ -206,6 +287,7 @@ public class GameTableController {
 	
 	ImageView handImgs[]=new ImageView[5];
 	ImageView boardImgs[]=new ImageView[6];
+	ImageView boardImgsOpponent[]=new ImageView[6];
 	
 	@FXML
 	public ImageView ownBoard1;
@@ -219,6 +301,21 @@ public class GameTableController {
 	public ImageView ownBoard5;
 	@FXML
 	public ImageView ownBoard6;
+	
+	@FXML
+	public ImageView opponentHeroFace;
+	@FXML
+	public ImageView opponentBoard1;
+	@FXML
+	public ImageView opponentBoard2;
+	@FXML
+	public ImageView opponentBoard3;
+	@FXML
+	public ImageView opponentBoard4;
+	@FXML
+	public ImageView opponentBoard5;
+	@FXML
+	public ImageView opponentBoard6;
 	
 	@FXML 
 	public Text ownDeckCounter; 

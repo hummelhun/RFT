@@ -88,67 +88,67 @@
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="200.0" fitWidth="210.0" layoutX="583.0" layoutY="84.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentHeroFace" fitHeight="200.0" fitWidth="210.0" layoutX="583.0" layoutY="84.0" onMouseClicked="#clickOnOpponentFace" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="Uther_Lightbringer.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownBoard5" fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard5" fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="475.0" onMouseClicked="#clickOnBoard5" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownBoard3" fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard3" fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="475.0" onMouseClicked="#clickOnBoard3" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownBoard6" fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard6" fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="475.0" onMouseClicked="#clickOnBoard6" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownBoard1" fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard1" fitHeight="140.0" fitWidth="120.0" layoutX="221.0" layoutY="475.0" onMouseClicked="#clickOnBoard1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownBoard4" fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard4" fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="475.0" onMouseClicked="#clickOnBoard4" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ownBoard2" fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ownBoard2" fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="475.0" onMouseClicked="#clickOnBoard2" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentBoard4" fitHeight="140.0" fitWidth="120.0" layoutX="716.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentBoard5" fitHeight="140.0" fitWidth="120.0" layoutX="881.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="220.0" layoutY="285.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentBoard1" fitHeight="140.0" fitWidth="120.0" layoutX="220.0" layoutY="285.0" onMouseClicked="#clickOnOpponentBoard1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentBoard2" fitHeight="140.0" fitWidth="120.0" layoutX="386.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentBoard3" fitHeight="140.0" fitWidth="120.0" layoutX="551.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="opponentBoard6" fitHeight="140.0" fitWidth="120.0" layoutX="1046.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
                </image>

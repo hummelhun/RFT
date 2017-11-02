@@ -131,6 +131,8 @@ public class Core {
 	  	  player2.getHand().add(player2.getDeck().get(0));
 		  player2.getDeck().remove(0);
 		}
+		player2.getBoard().add(riverCrocolisk);
+		player2.getBoard().add(bloodfenRaptor);
 		actualPlayer=0;
 		
 		

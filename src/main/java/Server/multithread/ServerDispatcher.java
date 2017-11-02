@@ -30,6 +30,7 @@ public class ServerDispatcher extends Thread {
         String senderPort = "" + socket.getPort();
         aMessage = senderIP + ":" + senderPort + " : " + aMessage;
         mMessageQueue.add(aMessage);
+        System.out.println(aMessage);
         notify();
     }
  

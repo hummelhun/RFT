@@ -39,9 +39,15 @@ public class ServerMain {
 	                    new ClientSender(clientInfo, serverDispatcher);
 	                clientInfo.mClientListener = clientListener;
 	                clientInfo.mClientSender = clientSender;
+	               
 	                clientListener.start();
 	                clientSender.start();
 	                serverDispatcher.addClient(clientInfo);
+	                System.out.println("Client connected on socket!");
+	                ///////////////////////////
+	                //here comes the logic!
+	                ///////////////////////////
+	                
 	            } catch (IOException ioe) {
 	                ioe.printStackTrace();
 	            }

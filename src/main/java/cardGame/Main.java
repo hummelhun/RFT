@@ -1,7 +1,10 @@
 package cardGame;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
+import Client.Client;
+import Client.Sender;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -81,6 +84,24 @@ public class Main extends Application{
 
 		launch(args);
 		
+	}
+	
+	public void connectionAttempt(){
+		Client client = new Client("127.0.0.1", 8005);
+		try {
+			client.createClientSocket();
+			client.clientInOut();
+			client.clientStdIn();
+		} catch (UnknownHostException e) {
+			System.err.println("Don't know about host " + client.getHostname());
+			System.exit(1);
+		} catch (IOException e) {
+			System.err.println("Couldn't get I/O for the connection to " + client.getHostname());
+			System.exit(1);
+		}
+		 Sender sender = new Sender(client.getOut());
+	        sender.setDaemon(true);
+	        sender.start();
 	}
 
 }

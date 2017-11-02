@@ -1,8 +1,14 @@
 package view;
 
+import Client.Client;
+import Client.ClientMain;
+import Client.Sender;
+import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import Client.Sender;
 import cardGame.Core;
 import cardGame.Main;
 import javafx.collections.FXCollections;
@@ -162,8 +168,7 @@ public class GameTableController {
 	
 	public void initData(Core core) {
 		this.c=core;
-		
-		
+		 
 	}
 	
 	

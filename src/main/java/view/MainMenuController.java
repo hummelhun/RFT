@@ -1,6 +1,12 @@
 package view;
 
 import cardGame.Core;
+
+import java.io.IOException;
+import java.net.UnknownHostException;
+
+import Client.Client;
+import Client.ClientMain;
 import cardGame.Main;
 import javafx.fxml.FXML;
 
@@ -29,6 +35,7 @@ public class MainMenuController {
 	private void handleNewGame() {
 		System.out.println("New GAme Started");
 		this.main.createGameTable(c);
+		main.connectionAttempt();
 	}
 	
 	@FXML

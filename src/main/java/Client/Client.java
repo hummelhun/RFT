@@ -12,7 +12,7 @@ public class Client {
 	String hostname;
 	int portNumber;
 	PrintWriter out;
-	BufferedReader in;
+	public BufferedReader in;
 	BufferedReader stdIn;
 	Socket clientSocket;
 	String userInput;

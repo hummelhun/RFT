@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import cardGame.Core;
  
 public class ServerMain {
 	public static void main(String[] args) throws IOException {
@@ -48,31 +48,12 @@ public class ServerMain {
 	                //here comes the logic!
 	                ///////////////////////////
 	                
+	                Core core = new Core(); 
+	                
 	            } catch (IOException ioe) {
 	                ioe.printStackTrace();
 	            }
 	         }
-		/*ExecutorService executor = null;
-		try {
-			server.createServerSocket();
-			executor = Executors.newFixedThreadPool(5);
-			System.out.println("Waiting for clients");
-			while (true) {
-				server.createClientSocket();
-				Runnable worker = new RequestHandler(server.getClientSocket(), server, message);
-				executor.execute(worker);
-				
-				
-			}
-		} catch (IOException e) {
-			System.out.println(
-					"Exception caught when trying to listen on port " + args[0] + " or listening for a connection");
-			System.out.println(e.getMessage());
-		} finally {
-			if (executor != null) {
-				executor.shutdown();
-			}
-		}*/
 
 	}
 }

@@ -28,7 +28,8 @@ public class ServerDispatcher extends Thread {
         Socket socket = aClientInfo.mSocket;
         String senderIP = socket.getInetAddress().getHostAddress();
         String senderPort = "" + socket.getPort();
-        aMessage = senderIP + ":" + senderPort + " : " + aMessage;
+        //aMessage = senderIP + ":" + senderPort + " : " + aMessage;
+        aMessage = aMessage;
         mMessageQueue.add(aMessage);
         System.out.println(aMessage);
         notify();
@@ -57,6 +58,10 @@ public class ServerDispatcher extends Thread {
         try {
            while (true) {
                String message = getNextMessageFromQueue();
+               if(message.contentEquals("LERAK")){
+            	   System.out.println("Lerakva");
+               }
+               System.out.println("Message:"+message);
                sendMessageToAllClients(message);
            }
         } catch (InterruptedException ie) {

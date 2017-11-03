@@ -57,7 +57,7 @@ public class ClientSender extends Thread
           // Commuication problem
        }
 
-       //mClientInfo.mClientListener.interrupt();
+       mClientInfo.mClientListener.interrupt();
        mServerDispatcher.deleteClient(mClientInfo);
    }
 

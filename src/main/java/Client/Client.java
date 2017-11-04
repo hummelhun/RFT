@@ -22,7 +22,9 @@ public class Client {
 		this.hostname = h;
 		this.portNumber = p;
 	}
-
+	public Client() {
+	
+	}
 	public void createClientSocket() {
 		try {
 			this.clientSocket = new Socket(hostname,portNumber);

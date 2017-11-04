@@ -4,7 +4,6 @@ import java.net.Socket;
 import java.util.Vector;
 
 public class ServerDispatcher extends Thread {
-	String who;
 	
 	private Vector mMessageQueue = new Vector();
     private Vector mClients = new Vector();
@@ -29,7 +28,7 @@ public class ServerDispatcher extends Thread {
         String senderIP = socket.getInetAddress().getHostAddress();
         String senderPort = "" + socket.getPort();
         //aMessage = senderIP + ":" + senderPort + " : " + aMessage;
-        aMessage = aMessage;
+        aMessage = aClientInfo.player + " | " + aMessage;
         mMessageQueue.add(aMessage);
         System.out.println(aMessage);
         notify();
@@ -52,18 +51,28 @@ public class ServerDispatcher extends Thread {
            clientInfo.mClientSender.sendMessage(aMessage);
         }
     }
+    
+    private synchronized void sendMessageToPlayer(String aMessage, ClientInfo clientInfo)
+    {
+           clientInfo.mClientSender.sendMessage(aMessage);
+    }
  
     public void run()
     {
         try {
-           while (true) {
-               String message = getNextMessageFromQueue();
-               if(message.contentEquals("LERAK")){
-            	   System.out.println("Lerakva");
-               }
-               System.out.println("Message:"+message);
-               sendMessageToAllClients(message);
-           }
+      
+        	while (true) {
+        	String message = getNextMessageFromQueue();
+        	String[] result = message.split("|");
+            System.out.println("result 0. element: "+result[0]);
+        	if(result[0].contentEquals("1")){
+        		ClientInfo clientInfo = (ClientInfo) mClients.get(1);
+                sendMessageToPlayer(message,clientInfo);        	}
+        	if(result[0].contentEquals("2")){
+        		ClientInfo clientInfo = (ClientInfo) mClients.get(0);
+        		 sendMessageToPlayer(message,clientInfo);
+        	}
+        	}
         } catch (InterruptedException ie) {
            // Thread interrupted. Stop its execution
         }

@@ -8,6 +8,9 @@ import java.util.concurrent.Executors;
 import cardGame.Core;
  
 public class ServerMain {
+	
+	static int playerN=1;
+	
 	public static void main(String[] args) throws IOException {
 		System.out.println("Start of main");
 		if (args.length < 1) {
@@ -39,11 +42,17 @@ public class ServerMain {
 	                    new ClientSender(clientInfo, serverDispatcher);
 	                clientInfo.mClientListener = clientListener;
 	                clientInfo.mClientSender = clientSender;
-	               
+	                clientInfo.player = playerN;
 	                clientListener.start();
 	                clientSender.start();
 	                serverDispatcher.addClient(clientInfo);
+	                if(playerN <2){
+	                playerN++;
+	                
+	                }
+	                System.out.println("player num: " + playerN);
 	                System.out.println("Client connected on socket!");
+	                
 	                ///////////////////////////
 	                //here comes the logic!
 	                ///////////////////////////

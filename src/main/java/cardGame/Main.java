@@ -22,7 +22,8 @@ public class Main extends Application{
 	
 	public Stage primaryStage;
 	public BorderPane mainMenu;
-	
+	Client client = new Client("127.0.0.1", 8005);
+	Sender sender = new Sender();
 	public Main() {
 	}
 	public Stage getPrimaryStage() {
@@ -67,7 +68,8 @@ public class Main extends Application{
 			pane = (AnchorPane) loader.load();
 			mainMenu.setCenter(pane);
 			GameTableController controller = loader.getController();
-			controller.initData(core);
+			controller.initData(core,client,sender);
+			
 			controller.setMain(this);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -87,7 +89,6 @@ public class Main extends Application{
 	}
 	
 	public void connectionAttempt(){
-		Client client = new Client("127.0.0.1", 8005);
 		try {
 			client.createClientSocket();
 			client.clientInOut();
@@ -99,9 +100,10 @@ public class Main extends Application{
 			System.err.println("Couldn't get I/O for the connection to " + client.getHostname());
 			System.exit(1);
 		}
-		 Sender sender = new Sender(client.getOut());
-	        sender.setDaemon(true);
-	        sender.start();
+		    this.sender = new Sender(client.getOut());
+		    this.sender.setDaemon(true);
+	        this.sender.start();
+	       
 	}
 
 }

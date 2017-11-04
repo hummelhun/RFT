@@ -30,6 +30,9 @@ public class GameTableController {
 	public int choose1;
 
 	
+	Core c = new Core();
+	Client client = new Client();
+	Sender sender = new Sender();
 	
 	public void refreshTheHandImages() {
 	    for (int i = 0; i < c.getPlayer1().getHand().size(); i++) {		    	
@@ -55,6 +58,8 @@ public class GameTableController {
 	
 	@FXML
 	public void startGame() {
+		
+        
 		c.startGame();
 		startButton.setVisible(false);
 		player1HealtText.setText(""+c.getPlayer1().getHealtPoint());
@@ -94,6 +99,7 @@ public class GameTableController {
 		
 		
 		refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
+		System.out.println("asd");
 	
 	}
 	
@@ -106,7 +112,7 @@ public class GameTableController {
 			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
 			manaBar2.setText("Mana: "+c.getPlayer2().getActualMana()+" /"+c.getPlayer2().getMana());
 			System.out.println(c.getActualPlayer());
-			
+			//sender.mOut.println("ENTURNBIATCH");
 			
 		} else {
 			if (c.getActualPlayer()==1) {
@@ -423,13 +429,11 @@ public class GameTableController {
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
-	
-	Core c = new Core();
-	
-	
-	public void initData(Core core) {
+
+	public void initData(Core core, Client client, Sender sender) {
 		this.c=core;
-		 
+		this.client=client;
+		this.sender=sender;
 	}
 	
 	

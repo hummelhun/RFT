@@ -58,7 +58,9 @@ public class GameTableController {
 	
 	@FXML
 	public void startGame() {
-		
+		   this.sender = new Sender(client.getOut());
+		    this.sender.setDaemon(true);
+	        this.sender.start();
         
 		c.startGame();
 		startButton.setVisible(false);
@@ -99,7 +101,7 @@ public class GameTableController {
 		
 		
 		refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
-		System.out.println("asd");
+		sender.setMassage("asd");
 	
 	}
 	

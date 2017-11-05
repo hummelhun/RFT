@@ -10,6 +10,7 @@ import java.io.PrintWriter;
 
 public class Sender extends Thread {
 	public PrintWriter mOut;
+	volatile String massage;
 	public Sender(PrintWriter aOut) {
 		mOut = aOut;
 	}
@@ -24,19 +25,28 @@ public class Sender extends Thread {
 
 	   LoggedPrintStream lpsOut = LoggedPrintStream.create(System.out);
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		
 		while (!isInterrupted()) {	
-			
-			System.setOut(lpsOut);
+			while(massage == null){ 
+			     try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+			}
+			/*System.setOut(lpsOut);
 			System.out.flush();
 			System.setOut(lpsOut.underlying);
 			//System.out.println("----- Log for System.out: -----\n" + lpsOut.buf);
 			String message = lpsOut.buf.toString();
-			lpsOut.buf.delete( 0, lpsOut.buf.length() );
-			if(message.contains("asd"))
+			lpsOut.buf.delete( 0, lpsOut.buf.length() );*/
+			if(massage.contains("asd"))
 			{
 				System.out.println("ITTVAGYOK");
-		    mOut.println(message);
+		    mOut.println(massage);
 			mOut.flush();
+			massage="";
 			}
 			
 			
@@ -45,6 +55,9 @@ public class Sender extends Thread {
 	}finally{/*POTATO*/}/*catch (IOException ioe) {
 
 	}*/
+	}
+	public void setMassage(String s){
+		this.massage=s;
 	}
 	
 }

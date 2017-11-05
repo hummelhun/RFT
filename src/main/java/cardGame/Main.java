@@ -100,9 +100,7 @@ public class Main extends Application{
 			System.err.println("Couldn't get I/O for the connection to " + client.getHostname());
 			System.exit(1);
 		}
-		    this.sender = new Sender(client.getOut());
-		    this.sender.setDaemon(true);
-	        this.sender.start();
+		  
 	       
 	}
 

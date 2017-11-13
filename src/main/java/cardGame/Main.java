@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 import Client.Client;
+import Client.Listener;
 import Client.Sender;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +23,9 @@ public class Main extends Application{
 	
 	public Stage primaryStage;
 	public BorderPane mainMenu;
-	Client client = new Client("127.0.0.1", 8005);
+	public static Client client = new Client("127.0.0.1", 8005);
 	Sender sender = new Sender();
+	Listener listener = new Listener();
 	public Main() {
 	}
 	public Stage getPrimaryStage() {

@@ -34,10 +34,17 @@ public class ClientMain {
 		}
 	
         Sender sender = new Sender(client.getOut());
+        Listener listener = new Listener(client.getIn(),client);
         sender.setDaemon(true);
         sender.start();
- 
-        try {
+        System.out.println("is this real life?");
+        listener.setDaemon(true);
+        listener.start();
+        System.out.println("or its just FANTA sea?");
+        while(true){ //this is a while cycle.. infinite
+        	}
+        
+        /*try {
            // Read messages from the server and print them
             String message;
            while ((message=client.in.readLine()) != null) {
@@ -46,7 +53,7 @@ public class ClientMain {
         } catch (IOException ioe) {
            System.err.println("Connection to server broken.");
            ioe.printStackTrace();
-        }
+        }*/
 
 	}
 

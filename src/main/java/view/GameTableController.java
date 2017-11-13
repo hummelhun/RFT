@@ -3,6 +3,7 @@ package view;
 import Client.Client;
 import Client.ClientMain;
 import Client.Sender;
+import Client.Listener;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -31,8 +32,9 @@ public class GameTableController {
 
 	
 	Core c = new Core();
-	Client client = new Client();
+	public static Client client = new Client();
 	Sender sender = new Sender();
+	Listener listener = new Listener();
 	
 	public void refreshTheHandImages() {
 	    for (int i = 0; i < c.getPlayer1().getHand().size(); i++) {		    	
@@ -58,10 +60,7 @@ public class GameTableController {
 	
 	@FXML
 	public void startGame() {
-		   this.sender = new Sender(client.getOut());
-		    this.sender.setDaemon(true);
-	        this.sender.start();
-        
+		System.out.println("ÉN VAGYOK A " + client.getPlayer() + " JÁTÉKOS!");
 		c.startGame();
 		startButton.setVisible(false);
 		player1HealtText.setText(""+c.getPlayer1().getHealtPoint());
@@ -432,10 +431,11 @@ public class GameTableController {
 		this.stage = stage;
 	}
 
-	public void initData(Core core, Client client, Sender sender) {
+	public void initData(Core core,Client client, Sender sender) {
 		this.c=core;
-		this.client=client;
 		this.sender=sender;
+		this.client=client;
+	        
 	}
 	
 	

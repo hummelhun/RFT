@@ -46,15 +46,16 @@ public class ServerMain {
 	                clientListener.start();
 	                clientSender.start();
 	                serverDispatcher.addClient(clientInfo);
-	                if(playerN <2){
+	                //System.out.println("player num: " + playerN);
+	                System.out.println("Client connected on socket!");
+	               /* if(playerN <2){
 	                playerN++;
 	                
-	                }
-	                System.out.println("player num: " + playerN);
-	                System.out.println("Client connected on socket!");
-	                
+	                }*/
+	                 
 	                ///////////////////////////
 	                //here comes the logic!
+	                //or not.. :D
 	                ///////////////////////////
 	                
 	                Core core = new Core(); 

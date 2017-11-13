@@ -7,11 +7,16 @@ public class ServerDispatcher extends Thread {
 	
 	private Vector mMessageQueue = new Vector();
     private Vector mClients = new Vector();
- 
- 
+    public int playerN = 0;
+    
     public synchronized void addClient(ClientInfo aClientInfo)
     {
+    	String message ="";
         mClients.add(aClientInfo);
+        message = "PLAYER | " + (playerN+1); 
+        ClientInfo clientInfo = (ClientInfo) mClients.get(playerN);
+        sendMessageToPlayer(message, clientInfo);
+        playerN++;
     }
  
 

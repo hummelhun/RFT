@@ -29,6 +29,7 @@ public class GameTableController {
 	private Stage stage;
 	public Image hatlap = new Image("cardback_0.png");
 	public int choose1;
+	public volatile static String player;
 
 	
 	Core c = new Core();

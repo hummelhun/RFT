@@ -16,7 +16,7 @@ public class Client {
 	BufferedReader stdIn;
 	Socket clientSocket;
 	String userInput;
-	String Player;
+	volatile String Player;
 
 	public Client(String h, int p) {
 		this.hostname = h;
@@ -77,7 +77,7 @@ public class Client {
 		return Player;
 	}
 
-	public void setPlayer(String player) {
+	synchronized public void setPlayer(String player) {
 		Player = player;
 	}
 

@@ -36,6 +36,7 @@ public class MainMenuController {
 		System.out.println("New GAme Started");
 		this.main.createGameTable(c);
 		main.connectionAttempt();
+		 
 	}
 	
 	@FXML

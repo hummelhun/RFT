@@ -95,6 +95,12 @@ public class Main extends Application{
 			client.createClientSocket();
 			client.clientInOut();
 			client.clientStdIn();
+			Sender sender = new Sender(client.getOut());
+			 Listener listener = new Listener(client.getIn(),client);
+			sender.setDaemon(true);
+	        sender.start();
+			 listener.setDaemon(true);
+		        listener.start();
 		} catch (UnknownHostException e) {
 			System.err.println("Don't know about host " + client.getHostname());
 			System.exit(1);

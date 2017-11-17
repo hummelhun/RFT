@@ -20,6 +20,7 @@ public class Listener extends Thread {
 	public Listener(){
 		
 	}
+
 	public void run() {
 		 try{
 
@@ -28,11 +29,11 @@ public class Listener extends Thread {
 		            String message;
 		           while ((message=mClient.in.readLine()) != null) {
 		        	   
-		        	   String[] result = message.split("|");
+		        	   String[] result = message.split(" | ");
 		               System.out.println(message);
-		               
+		               System.out.println(result[0]);
 		               switch(result[0]){
-		               case "PLAYER": Main.client.setPlayer(result[1]);
+		               case "PLAYER": {GameTableController.client.setPlayer(result[2]);} break;
 		               }
 		           }
 				}

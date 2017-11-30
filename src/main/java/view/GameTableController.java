@@ -37,12 +37,12 @@ public class GameTableController {
 	Sender sender = new Sender();
 	Listener listener = new Listener();
 	
-	public void refreshTheHandImages() {
-	    for (int i = 0; i < c.getPlayer1().getHand().size(); i++) {		    	
-	    	Image img2 = new Image(c.getPlayer1().getHand().get(i).getFileName()); 
+	public void refreshTheHandImages(Player player) {
+	    for (int i = 0; i < player.getHand().size(); i++) {		    	
+	    	Image img2 = new Image(player.getHand().get(i).getFileName()); 
 			handImgs[i].setImage(img2);
 		}
-	    for (int i = c.getPlayer1().getHand().size(); i < 5; i++) {
+	    for (int i = player.getHand().size(); i < 5; i++) {
 	    	handImgs[i].setImage(hatlap);
 //	    	handImgs[i].setOpacity(0);
 		}
@@ -58,51 +58,124 @@ public class GameTableController {
 			imagearray[i].setImage(hatlap);
 		}
 	}
+	private void clickOnOwnHandWithIndex(Player player, int index) {
+		if (player.getHand().get(index) != null && player.getActualMana()>=player.getHand().get(index).getManaCost()) {
+			player.getBoard().add(player.getHand().get(index));
+//			for (MinionCard card : player.getHand()) {
+//				System.out.println(card.getCardName());
+//			}
+//			System.out.println("----------");
+			Image img = new Image(player.getHand().get(index).getFileName());
+			boardImgs[player.getBoard().size() - 1].setImage(img);
+			
+			player.setActualMana(player.getActualMana()-player.getHand().get(index).getManaCost());
+			manaBar1.setText(""+player.getActualMana()+"/"+player.getMana());
+			player.getHand().remove(index);
+			refreshTheHandImages(player);
+			
+		}
+	}
 	
 	@FXML
 	public void startGame() {
 		System.out.println("ÉN VAGYOK A " + client.getPlayer() + " JÁTÉKOS!");
 		c.startGame();
 		startButton.setVisible(false);
-		player1HealtText.setText(""+c.getPlayer1().getHealtPoint());
-		player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
-		manaBar1.setText("Mana: "+c.getPlayer1().getActualMana()+"/ "+c.getPlayer1().getMana());
-		manaBar2.setText("Mana: "+c.getPlayer2().getActualMana()+"/ "+c.getPlayer2().getMana());
-		c.getPlayer1().getHand().get(0).getFileName();
-		Image image = new Image(c.getPlayer1().getHand().get(0).getFileName());
-		ownHand1.setImage(image);
-		Image image2 = new Image(c.getPlayer1().getHand().get(1).getFileName());
-		ownHand2.setImage(image2);
-		Image image3 = new Image(c.getPlayer1().getHand().get(2).getFileName());
-		ownHand3.setImage(image3);
 		
-		
-		ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
-		ownDeckCounter2.setText("Cards left: "+c.getPlayer2().getDeck().size());
-		handImgs[0]=ownHand1;
-		handImgs[1]=ownHand2;
-		handImgs[2]=ownHand3;
-		handImgs[3]=ownHand4;
-		handImgs[4]=ownHand5;
-		
-		boardImgs[0]=ownBoard1;
-		boardImgs[1]=ownBoard2;
-		boardImgs[2]=ownBoard3;
-		boardImgs[3]=ownBoard4;
-		boardImgs[4]=ownBoard5;
-		boardImgs[5]=ownBoard6;
-		
-		boardImgsOpponent[0]=opponentBoard1;
-		boardImgsOpponent[1]=opponentBoard2;
-		boardImgsOpponent[2]=opponentBoard3;
-		boardImgsOpponent[3]=opponentBoard4;
-		boardImgsOpponent[4]=opponentBoard5;
-		boardImgsOpponent[5]=opponentBoard6;
-		
-		
-		refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
-		sender.setMassage("asd");
-	
+		if(Integer.parseInt(client.getPlayer())==1) {
+			System.out.println("asdfg 1");
+			playerCode.setText(""+client.getPlayer());
+			player1HealtText.setText(""+c.getPlayer1().getHealtPoint());
+			player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
+			manaBar1.setText("Mana: "+c.getPlayer1().getActualMana()+"/ "+c.getPlayer1().getMana());
+			manaBar2.setText("Mana: "+c.getPlayer2().getActualMana()+"/ "+c.getPlayer2().getMana());
+			
+			Image image = new Image(c.getPlayer1().getHand().get(0).getFileName());
+			ownHand1.setImage(image);
+			Image image2 = new Image(c.getPlayer1().getHand().get(1).getFileName());
+			ownHand2.setImage(image2);
+			Image image3 = new Image(c.getPlayer1().getHand().get(2).getFileName());
+			ownHand3.setImage(image3);
+			
+			Image image4 = new Image(c.getPlayer1().getHeroFileName());
+			heroFace.setImage(image4);
+			Image image5 = new Image(c.getPlayer2().getHeroFileName());
+			opponentHeroFace.setImage(image5);
+			
+			ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
+			ownDeckCounter2.setText("Cards left: "+c.getPlayer2().getDeck().size());
+			
+			handImgs[0]=ownHand1;
+			handImgs[1]=ownHand2;
+			handImgs[2]=ownHand3;
+			handImgs[3]=ownHand4;
+			handImgs[4]=ownHand5;
+			
+			boardImgs[0]=ownBoard1;
+			boardImgs[1]=ownBoard2;
+			boardImgs[2]=ownBoard3;
+			boardImgs[3]=ownBoard4;
+			boardImgs[4]=ownBoard5;
+			boardImgs[5]=ownBoard6;
+			
+			boardImgsOpponent[0]=opponentBoard1;
+			boardImgsOpponent[1]=opponentBoard2;
+			boardImgsOpponent[2]=opponentBoard3;
+			boardImgsOpponent[3]=opponentBoard4;
+			boardImgsOpponent[4]=opponentBoard5;
+			boardImgsOpponent[5]=opponentBoard6;
+			
+			refreshBoardImages(c.getPlayer1(), boardImgsOpponent);
+			refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
+		}
+
+		if(Integer.parseInt(client.getPlayer())==2) {
+			System.out.println("asdfg 2");
+			playerCode.setText(""+client.getPlayer());
+			player1HealtText.setText(""+c.getPlayer2().getHealtPoint());
+			player2HealtText.setText(""+c.getPlayer1().getHealtPoint());
+			manaBar1.setText("Mana: "+c.getPlayer2().getActualMana()+"/ "+c.getPlayer2().getMana());
+			manaBar2.setText("Mana: "+c.getPlayer1().getActualMana()+"/ "+c.getPlayer1().getMana());
+			
+			Image image = new Image(c.getPlayer2().getHand().get(0).getFileName());
+			ownHand1.setImage(image);
+			Image image2 = new Image(c.getPlayer2().getHand().get(1).getFileName());
+			ownHand2.setImage(image2);
+			Image image3 = new Image(c.getPlayer2().getHand().get(2).getFileName());
+			ownHand3.setImage(image3);
+			
+			Image image4 = new Image(c.getPlayer2().getHeroFileName());
+			heroFace.setImage(image4);
+			Image image5 = new Image(c.getPlayer1().getHeroFileName());
+			opponentHeroFace.setImage(image5);
+			
+			ownDeckCounter.setText("Cards left: "+c.getPlayer2().getDeck().size());
+			ownDeckCounter2.setText("Cards left: "+c.getPlayer1().getDeck().size());
+			
+			handImgs[0]=ownHand1;
+			handImgs[1]=ownHand2;
+			handImgs[2]=ownHand3;
+			handImgs[3]=ownHand4;
+			handImgs[4]=ownHand5;
+			
+			boardImgs[0]=ownBoard1;
+			boardImgs[1]=ownBoard2;
+			boardImgs[2]=ownBoard3;
+			boardImgs[3]=ownBoard4;
+			boardImgs[4]=ownBoard5;
+			boardImgs[5]=ownBoard6;
+			
+			boardImgsOpponent[0]=opponentBoard1;
+			boardImgsOpponent[1]=opponentBoard2;
+			boardImgsOpponent[2]=opponentBoard3;
+			boardImgsOpponent[3]=opponentBoard4;
+			boardImgsOpponent[4]=opponentBoard5;
+			boardImgsOpponent[5]=opponentBoard6;
+			
+			refreshBoardImages(c.getPlayer1(), boardImgsOpponent);
+			refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
+		}
+
 	}
 	
 	
@@ -127,7 +200,7 @@ public class GameTableController {
 				c.getPlayer1().getDeck().remove(0);
 				ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
 				
-				refreshTheHandImages();
+				refreshTheHandImages(c.getPlayer1());
 			}	
 		}
 		
@@ -136,103 +209,56 @@ public class GameTableController {
 	}
 	
 	@FXML
-	public void clickOnOwnHand1() {
-
-		if (c.getPlayer1().getHand().get(0) != null && c.getPlayer1().getActualMana()>=c.getPlayer1().getHand().get(0).getManaCost()) {
-			c.getPlayer1().getBoard().add(c.getPlayer1().getHand().get(0));
-			for (MinionCard card : c.getPlayer1().getHand()) {
-				System.out.println(card.getCardName());
-			}
-			System.out.println("----------");
-			Image img = new Image(c.getPlayer1().getHand().get(0).getFileName());
-			boardImgs[c.getPlayer1().getBoard().size() - 1].setImage(img);
-			
-			c.getPlayer1().setActualMana(c.getPlayer1().getActualMana()-c.getPlayer1().getHand().get(0).getManaCost());
-			manaBar1.setText(""+c.getPlayer1().getActualMana()+"/"+c.getPlayer1().getMana());
-			c.getPlayer1().getHand().remove(0);
-			refreshTheHandImages();
-			
-
+	public void clickOnOwnHand1() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOwnHandWithIndex(c.getPlayer1(), 0);			
+		}
+		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOwnHandWithIndex(c.getPlayer2(), 0);
 		}
 	}
 	
 	@FXML
 	public void clickOnOwnHand2() {
-
-		if (c.getPlayer1().getHand().get(1) != null && c.getPlayer1().getActualMana()>=c.getPlayer1().getHand().get(1).getManaCost()) {
-			c.getPlayer1().getBoard().add(c.getPlayer1().getHand().get(1));
-			for (MinionCard card : c.getPlayer1().getHand()) {
-				System.out.println(card.getCardName());
-			}
-			System.out.println("----------");
-			Image img = new Image(c.getPlayer1().getHand().get(1).getFileName());
-			boardImgs[c.getPlayer1().getBoard().size() - 1].setImage(img);
-			
-			c.getPlayer1().setActualMana(c.getPlayer1().getActualMana()-c.getPlayer1().getHand().get(1).getManaCost());
-			manaBar1.setText("Mana: "+c.getPlayer1().getActualMana()+"/ "+c.getPlayer1().getMana());
-			
-			c.getPlayer1().getHand().remove(1);
-			refreshTheHandImages();
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOwnHandWithIndex(c.getPlayer1(), 1);			
+		}
+		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOwnHandWithIndex(c.getPlayer2(), 1);
 		}
 	}
 	@FXML
-	public void clickOnOwnHand3() {
+	public void clickOnOwnHand3() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOwnHandWithIndex(c.getPlayer1(), 2);		
+		}
 		
-		if (c.getPlayer1().getHand().get(2) != null && c.getPlayer1().getActualMana()>=c.getPlayer1().getHand().get(2).getManaCost()) {
-			c.getPlayer1().getBoard().add(c.getPlayer1().getHand().get(2));
-			for (MinionCard card : c.getPlayer1().getHand()) {
-				System.out.println(card.getCardName());
-			}
-			System.out.println("----------");			
-			Image img = new Image(c.getPlayer1().getHand().get(2).getFileName());			
-			boardImgs[c.getPlayer1().getBoard().size()-1].setImage(img);
-			
-			c.getPlayer1().setActualMana(c.getPlayer1().getActualMana()-c.getPlayer1().getHand().get(2).getManaCost());
-			manaBar1.setText(""+c.getPlayer1().getActualMana()+"/"+c.getPlayer1().getMana());
-			
-			c.getPlayer1().getHand().remove(2);		    
-			refreshTheHandImages();
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOwnHandWithIndex(c.getPlayer2(), 2);
 		}
 	}
 	
 	@FXML
-	public void clickOnOwnHand4() {
+	public void clickOnOwnHand4() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOwnHandWithIndex(c.getPlayer1(), 3);			
+		}
 		
-		if (c.getPlayer1().getHand().get(3) != null && c.getPlayer1().getActualMana()>=c.getPlayer1().getHand().get(3).getManaCost()) {
-			c.getPlayer1().getBoard().add(c.getPlayer1().getHand().get(3));
-			for (MinionCard card : c.getPlayer1().getHand()) {
-				System.out.println(card.getCardName());
-			}
-			System.out.println("----------");			
-			Image img = new Image(c.getPlayer1().getHand().get(3).getFileName());			
-			boardImgs[c.getPlayer1().getBoard().size()-1].setImage(img);
-			
-			c.getPlayer1().setActualMana(c.getPlayer1().getActualMana()-c.getPlayer1().getHand().get(3).getManaCost());
-			manaBar1.setText(""+c.getPlayer1().getActualMana()+"/"+c.getPlayer1().getMana());
-			
-			c.getPlayer1().getHand().remove(3);		    
-			refreshTheHandImages();
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOwnHandWithIndex(c.getPlayer2(), 3);
 		}
 	}
 	
 	@FXML
-	public void clickOnOwnHand5() {
+	public void clickOnOwnHand5() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOwnHandWithIndex(c.getPlayer1(), 4);			
+		}
 		
-		if (c.getPlayer1().getHand().get(4) != null && c.getPlayer1().getActualMana()>=c.getPlayer1().getHand().get(4).getManaCost()) {
-			c.getPlayer1().getBoard().add(c.getPlayer1().getHand().get(4));
-			for (MinionCard card : c.getPlayer1().getHand()) {
-				System.out.println(card.getCardName());
-			}
-			System.out.println("----------");			
-			Image img = new Image(c.getPlayer1().getHand().get(4).getFileName());			
-			boardImgs[c.getPlayer1().getBoard().size()-1].setImage(img);
-			
-			c.getPlayer1().setActualMana(c.getPlayer1().getActualMana()-c.getPlayer1().getHand().get(4).getManaCost());
-			manaBar1.setText(""+c.getPlayer1().getActualMana()+"/"+c.getPlayer1().getMana());
-			
-			c.getPlayer1().getHand().remove(4);		    
-			refreshTheHandImages();
-			
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOwnHandWithIndex(c.getPlayer2(), 4);
 		}
 	}
 	
@@ -316,8 +342,12 @@ public class GameTableController {
 	@FXML
 	public ImageView ownBoard6;
 	
+	
+	@FXML
+	public ImageView heroFace;
 	@FXML
 	public ImageView opponentHeroFace;
+	
 	@FXML
 	public ImageView opponentBoard1;
 	@FXML
@@ -330,6 +360,8 @@ public class GameTableController {
 	public ImageView opponentBoard5;
 	@FXML
 	public ImageView opponentBoard6;
+
+	
 	
 	@FXML 
 	public Text ownDeckCounter; 
@@ -354,8 +386,12 @@ public class GameTableController {
 	Text manaBar2;
 	
 	@FXML
+	Text playerCode;
+	
+	@FXML
 	public void megvaltoztat() {
 		ownHand1.setImage(bloodfen);
+	
 		
 	}
 	@FXML

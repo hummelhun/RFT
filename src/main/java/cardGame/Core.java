@@ -111,7 +111,7 @@ public class Core {
 		deck1.add(riverCrocolisk);
 		deck1.add(riverCrocolisk);
 		
-		deck2.add(bloodfenRaptor);
+		deck2.add(murlocRaider);
 		deck2.add(murlocRaider);
 		deck2.add(riverCrocolisk);
 		deck2.add(murlocRaider);
@@ -121,12 +121,12 @@ public class Core {
 		deck2.add(riverCrocolisk);
 		deck2.add(riverCrocolisk);
 			
-		player1 = new Player(0, "Bloody Steve", hand1, deck1, board1, 1, 1, 20);
+		player1 = new Player(0, "Bloody Steve", hand1, deck1, board1, 1, 1, 20, "Uther_Lightbringer.png");
 		for (int i = 0; i < 3; i++) {		
 	  	  player1.getHand().add(player1.getDeck().get(0));
 		  player1.getDeck().remove(0);
 		}
-		player2 = new Player(1, "Noob Bob", hand2, deck2, board2, 0, 0, 25);
+		player2 = new Player(1, "Noob Bob", hand2, deck2, board2, 0, 0, 25, "Jaina_Proudmoore.png");
 		for (int i = 0; i < 3; i++) {		
 	  	  player2.getHand().add(player2.getDeck().get(0));
 		  player2.getDeck().remove(0);

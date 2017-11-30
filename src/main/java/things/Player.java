@@ -12,8 +12,10 @@ public class Player {
 	private int mana;
 	private int actualMana;
 	private int healtPoint;
+	private String heroFileName;
 	
-	public Player(int id, String name, List<MinionCard> hand, List<MinionCard> deck, List<MinionCard> board, int mana, int actualMana, int healthPoint) {
+	public Player(int id, String name, List<MinionCard> hand, List<MinionCard> deck, List<MinionCard> board, 
+				  int mana, int actualMana, int healthPoint, String heroFileName) {
 		super();
 		this.id= id;
 		this.name = name;
@@ -23,6 +25,7 @@ public class Player {
 		this.mana = mana;
 		this.actualMana = actualMana;
 		this.healtPoint = healthPoint;
+		this.heroFileName= heroFileName;
 	}
 	
 	public void addCardToHand(MinionCard card) {
@@ -95,6 +98,15 @@ public class Player {
 	public void setBoard(List<MinionCard> board) {
 		this.board = board;
 	}
+
+	public String getHeroFileName() {
+		return heroFileName;
+	}
+
+	public void setHeroFileName(String heroFileName) {
+		this.heroFileName = heroFileName;
+	}
+	
 	
 	
 

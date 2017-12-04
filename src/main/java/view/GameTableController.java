@@ -3,6 +3,7 @@ package view;
 import Client.Client;
 import Client.ClientMain;
 import Client.Sender;
+import Server.multithread.ClientListener;
 import Client.Listener;
 import java.io.IOException;
 
@@ -21,7 +22,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import things.MinionCard;
 import things.Player;
 
 public class GameTableController {
@@ -31,7 +31,6 @@ public class GameTableController {
 	public int choose1;
 	public volatile static String player;
 
-	
 	Core c = new Core();
 	public static Client client = new Client();
 	Sender sender = new Sender();
@@ -39,8 +38,8 @@ public class GameTableController {
 	
 	public void refreshTheHandImages(Player player) {
 	    for (int i = 0; i < player.getHand().size(); i++) {		    	
-	    	Image img2 = new Image(player.getHand().get(i).getFileName()); 
-			handImgs[i].setImage(img2);
+	    	Image img = new Image(player.getHand().get(i).getFileName()); 
+			handImgs[i].setImage(img);
 		}
 	    for (int i = player.getHand().size(); i < 5; i++) {
 	    	handImgs[i].setImage(hatlap);
@@ -51,13 +50,20 @@ public class GameTableController {
 	public void refreshBoardImages(Player player, ImageView[] imagearray) {
 		for (int i = 0; i < player.getBoard().size(); i++) {
 			Image img = new Image(player.getBoard().get(i).getFileName());
-			boardImgsOpponent[i].setImage(img);
+			imagearray[i].setImage(img);
 		}
-		for (int i = player.getBoard().size(); i < 6; i++) {
-			
+		for (int i = player.getBoard().size(); i < 6; i++) {			
 			imagearray[i].setImage(hatlap);
 		}
 	}
+	private void removeDeadMinionsFromTheBoard(Player player) {
+		for (int i = 0; i < player.getBoard().size(); i++) {
+			if (player.getBoard().get(i).getHealthPoint()<=0) {
+				player.getBoard().remove(i);				
+			}
+		}
+	}
+	
 	private void clickOnOwnHandWithIndex(Player player, int index) {
 		if (player.getHand().get(index) != null && player.getActualMana()>=player.getHand().get(index).getManaCost()) {
 			player.getBoard().add(player.getHand().get(index));
@@ -73,6 +79,35 @@ public class GameTableController {
 			player.getHand().remove(index);
 			refreshTheHandImages(player);
 			
+			
+		}
+	}
+	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex, int attackerMinion) {
+		
+		player1.getBoard().get(attackerMinion).setHealthPoint(player1.getBoard().get(attackerMinion).getHealthPoint()-player2.getBoard().get(boardIndex).getAttackPower());
+		player2.getBoard().get(boardIndex).setHealthPoint(player2.getBoard().get(boardIndex).getHealthPoint()-player1.getBoard().get(attackerMinion).getAttackPower());
+		
+//		System.out.println("Támadó: "+attackerMinion);
+//		System.out.println("Támadott: "+boardIndex);
+//		System.out.println("Támadónak marad élete: "+player1.getBoard().get(attackerMinion).getHealthPoint());
+//		System.out.println("Támadottnak marad élete: "+player2.getBoard().get(boardIndex).getHealthPoint());
+		removeDeadMinionsFromTheBoard(player1);
+		removeDeadMinionsFromTheBoard(player2);
+	
+		refreshBoardImages(player1, boardImgs);
+		refreshBoardImages(player2, boardImgsOpponent);
+		
+		refreshMinionBars(player1, ownHandMinionBars);
+		refreshMinionBars(player2, opponentHandMinionBars);
+		
+	}
+	
+	private void refreshMinionBars(Player player, Text[] textArray) {
+		for (int i = 0; i < player.getBoard().size(); i++) {
+			textArray[i].setText(""+player.getBoard().get(i).getAttackPower()+"  "+player.getBoard().get(i).getHealthPoint());			
+		}
+		for (int i = player.getBoard().size(); i < 6; i++) {			
+			textArray[i].setText("");
 		}
 	}
 	
@@ -83,7 +118,7 @@ public class GameTableController {
 		startButton.setVisible(false);
 		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			System.out.println("asdfg 1");
+
 			playerCode.setText(""+client.getPlayer());
 			player1HealtText.setText(""+c.getPlayer1().getHealtPoint());
 			player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
@@ -92,15 +127,15 @@ public class GameTableController {
 			
 			Image image = new Image(c.getPlayer1().getHand().get(0).getFileName());
 			ownHand1.setImage(image);
-			Image image2 = new Image(c.getPlayer1().getHand().get(1).getFileName());
-			ownHand2.setImage(image2);
-			Image image3 = new Image(c.getPlayer1().getHand().get(2).getFileName());
-			ownHand3.setImage(image3);
+			image = new Image(c.getPlayer1().getHand().get(1).getFileName());
+			ownHand2.setImage(image);
+			image = new Image(c.getPlayer1().getHand().get(2).getFileName());
+			ownHand3.setImage(image);
 			
-			Image image4 = new Image(c.getPlayer1().getHeroFileName());
-			heroFace.setImage(image4);
-			Image image5 = new Image(c.getPlayer2().getHeroFileName());
-			opponentHeroFace.setImage(image5);
+			image = new Image(c.getPlayer1().getHeroFileName());
+			heroFace.setImage(image);
+			image = new Image(c.getPlayer2().getHeroFileName());
+			opponentHeroFace.setImage(image);
 			
 			ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
 			ownDeckCounter2.setText("Cards left: "+c.getPlayer2().getDeck().size());
@@ -125,12 +160,32 @@ public class GameTableController {
 			boardImgsOpponent[4]=opponentBoard5;
 			boardImgsOpponent[5]=opponentBoard6;
 			
-			refreshBoardImages(c.getPlayer1(), boardImgsOpponent);
+			refreshBoardImages(c.getPlayer1(), boardImgs);
 			refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
+			
+			ownHandMinionBars[0]=ownHandMinionBar1;
+			ownHandMinionBars[1]=ownHandMinionBar2;
+			ownHandMinionBars[2]=ownHandMinionBar3;
+			ownHandMinionBars[3]=ownHandMinionBar4;
+			ownHandMinionBars[4]=ownHandMinionBar5;
+			ownHandMinionBars[5]=ownHandMinionBar6;
+			
+			opponentHandMinionBars[0]=opponentHandMinionBar1;
+			opponentHandMinionBars[1]=opponentHandMinionBar2;
+			opponentHandMinionBars[2]=opponentHandMinionBar3;
+			opponentHandMinionBars[3]=opponentHandMinionBar4;
+			opponentHandMinionBars[4]=opponentHandMinionBar5;
+			opponentHandMinionBars[5]=opponentHandMinionBar6;
+			
+			refreshMinionBars(c.getPlayer1(), ownHandMinionBars);
+			refreshMinionBars(c.getPlayer2(), opponentHandMinionBars);
+			
+		
+			
 		}
 
 		if(Integer.parseInt(client.getPlayer())==2) {
-			System.out.println("asdfg 2");
+
 			playerCode.setText(""+client.getPlayer());
 			player1HealtText.setText(""+c.getPlayer2().getHealtPoint());
 			player2HealtText.setText(""+c.getPlayer1().getHealtPoint());
@@ -173,7 +228,27 @@ public class GameTableController {
 			boardImgsOpponent[5]=opponentBoard6;
 			
 			refreshBoardImages(c.getPlayer1(), boardImgsOpponent);
-			refreshBoardImages(c.getPlayer2(), boardImgsOpponent);
+			refreshBoardImages(c.getPlayer2(), boardImgs);
+			
+			ownHandMinionBars[0]=ownHandMinionBar1;
+			ownHandMinionBars[1]=ownHandMinionBar2;
+			ownHandMinionBars[2]=ownHandMinionBar3;
+			ownHandMinionBars[3]=ownHandMinionBar4;
+			ownHandMinionBars[4]=ownHandMinionBar5;
+			ownHandMinionBars[5]=ownHandMinionBar6;
+			
+			opponentHandMinionBars[0]=opponentHandMinionBar1;
+			opponentHandMinionBars[1]=opponentHandMinionBar2;
+			opponentHandMinionBars[2]=opponentHandMinionBar3;
+			opponentHandMinionBars[3]=opponentHandMinionBar4;
+			opponentHandMinionBars[4]=opponentHandMinionBar5;
+			opponentHandMinionBars[5]=opponentHandMinionBar6;
+			
+			refreshMinionBars(c.getPlayer2(), ownHandMinionBars);
+			refreshMinionBars(c.getPlayer1(), opponentHandMinionBars);
+			
+			
+					
 		}
 
 	}
@@ -181,12 +256,24 @@ public class GameTableController {
 	
 	@FXML
 	public void endTurnButton() {
+//		if(Integer.parseInt(client.getPlayer())==1) {//&& c.getActualPlayer()==0
+//			c.setActualPlayer(1);
+//			
+//		}
+//		if(Integer.parseInt(client.getPlayer())==2) {// && c.getActualPlayer()==1
+//			c.setActualPlayer(0);			
+//			
+//		}
+		
 		if (c.getActualPlayer()==0) {
 			c.setActualPlayer(1);
 			c.getPlayer2().setMana(c.getPlayer2().getMana()+1);
 			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
 			manaBar2.setText("Mana: "+c.getPlayer2().getActualMana()+" /"+c.getPlayer2().getMana());
 			System.out.println(c.getActualPlayer());
+			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
+			c.getPlayer2().getDeck().remove(0);
+			refreshTheHandImages(c.getPlayer2());
 			//sender.mOut.println("ENTURNBIATCH");
 			
 		} else {
@@ -288,30 +375,77 @@ public class GameTableController {
 	}
 	
 	@FXML
-	public void clickOnOpponentBoard1() {
-		c.getPlayer1().getBoard().get(choose1).setHealthPoint(c.getPlayer1().getBoard().get(choose1).getHealthPoint()-c.getPlayer2().getBoard().get(0).getAttackPower());
-		c.getPlayer2().getBoard().get(0).setHealthPoint(c.getPlayer2().getBoard().get(0).getHealthPoint()-c.getPlayer1().getBoard().get(choose1).getAttackPower());
-		for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
-			if (c.getPlayer1().getBoard().get(i).getHealthPoint()<=0) {
-				c.getPlayer1().getBoard().remove(i);
-				
-			}
-		}
-		for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
-			if (c.getPlayer2().getBoard().get(i).getHealthPoint()<=0) {
-				c.getPlayer2().getBoard().remove(i);
-				
-			}
-		}
-		refreshBoardImages(c.getPlayer1(),boardImgs);
-		refreshBoardImages(c.getPlayer2(),boardImgsOpponent);
-		
+	public void clickOnOpponentBoard1() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 0, choose1);
+		}		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 0,choose1);
+		}	
+			
+	}
+	@FXML
+	public void clickOnOpponentBoard2() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 1, choose1);
+		}		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 1, choose1);
+		}	
 		
 	}
 	@FXML
+	public void clickOnOpponentBoard3() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 2, choose1);
+		}		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 2, choose1);
+		}		
+	}
+	@FXML
+	public void clickOnOpponentBoard4() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 3, choose1);
+		}		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 3, choose1);
+		}		
+	}
+	@FXML
+	public void clickOnOpponentBoard5() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 4, choose1);
+		}		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 4, choose1);
+		}		
+	}
+	@FXML
+	public void clickOnOpponentBoard6() {		
+		if(Integer.parseInt(client.getPlayer())==1) {
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 5, choose1);
+		}		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 5, choose1);
+		}		
+	}
+	@FXML
 	public void clickOnOpponentFace() {
-		c.getPlayer2().setHealtPoint(c.getPlayer2().getHealtPoint()-c.getPlayer1().getBoard().get(choose1).getAttackPower());
-		player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
+		if(Integer.parseInt(client.getPlayer())==1) {
+			c.getPlayer2().setHealtPoint(c.getPlayer2().getHealtPoint()-c.getPlayer1().getBoard().get(choose1).getAttackPower());
+			c.getPlayer1().getBoard().get(choose1).setAttackNow(0);
+			player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
+			
+		}
+		
+		if(Integer.parseInt(client.getPlayer())==2) {
+			c.getPlayer1().setHealtPoint(c.getPlayer1().getHealtPoint()-c.getPlayer2().getBoard().get(choose1).getAttackPower());
+			c.getPlayer2().getBoard().get(choose1).setAttackNow(0);
+			player2HealtText.setText(""+c.getPlayer1().getHealtPoint());
+			
+		}
+
 	}
 	
 	@FXML
@@ -325,9 +459,39 @@ public class GameTableController {
 	@FXML
 	public ImageView ownHand5;
 	
-	ImageView handImgs[]=new ImageView[5];
-	ImageView boardImgs[]=new ImageView[6];
-	ImageView boardImgsOpponent[]=new ImageView[6];
+	@FXML
+	public Text ownHandMinionBar1;
+	@FXML
+	public Text ownHandMinionBar2;
+	@FXML
+	public Text ownHandMinionBar3;
+	@FXML
+	public Text ownHandMinionBar4;
+	@FXML
+	public Text ownHandMinionBar5;
+	@FXML
+	public Text ownHandMinionBar6;
+	@FXML
+	public Text opponentHandMinionBar1;
+	@FXML
+	public Text opponentHandMinionBar2;
+	@FXML
+	public Text opponentHandMinionBar3;
+	@FXML
+	public Text opponentHandMinionBar4;
+	@FXML
+	public Text opponentHandMinionBar5;
+	@FXML
+	public Text opponentHandMinionBar6;
+	
+	
+	public ImageView handImgs[]=new ImageView[5];
+	public ImageView boardImgs[]=new ImageView[6];
+	public ImageView boardImgsOpponent[]=new ImageView[6];
+	
+	public Text ownHandMinionBars[] = new Text[6];
+	public Text opponentHandMinionBars[] = new Text[6];
+	
 	
 	@FXML
 	public ImageView ownBoard1;
@@ -390,9 +554,7 @@ public class GameTableController {
 	
 	@FXML
 	public void megvaltoztat() {
-		ownHand1.setImage(bloodfen);
-	
-		
+		ownHand1.setImage(bloodfen);	
 	}
 	@FXML
 	public void feltolOH1() {

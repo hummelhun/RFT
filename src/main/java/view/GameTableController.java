@@ -20,6 +20,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import things.Player;
@@ -67,10 +69,6 @@ public class GameTableController {
 	private void clickOnOwnHandWithIndex(Player player, int index) {
 		if (player.getHand().get(index) != null && player.getActualMana()>=player.getHand().get(index).getManaCost()) {
 			player.getBoard().add(player.getHand().get(index));
-//			for (MinionCard card : player.getHand()) {
-//				System.out.println(card.getCardName());
-//			}
-//			System.out.println("----------");
 			Image img = new Image(player.getHand().get(index).getFileName());
 			boardImgs[player.getBoard().size() - 1].setImage(img);
 			
@@ -78,28 +76,33 @@ public class GameTableController {
 			manaBar1.setText(""+player.getActualMana()+"/"+player.getMana());
 			player.getHand().remove(index);
 			refreshTheHandImages(player);
+			refreshMinionBars(player, ownHandMinionBars);
+			
+			refreshBoardRectangles(player);
 			
 			
 		}
 	}
-	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex, int attackerMinion) {
-		
-		player1.getBoard().get(attackerMinion).setHealthPoint(player1.getBoard().get(attackerMinion).getHealthPoint()-player2.getBoard().get(boardIndex).getAttackPower());
-		player2.getBoard().get(boardIndex).setHealthPoint(player2.getBoard().get(boardIndex).getHealthPoint()-player1.getBoard().get(attackerMinion).getAttackPower());
-		
-//		System.out.println("Támadó: "+attackerMinion);
-//		System.out.println("Támadott: "+boardIndex);
-//		System.out.println("Támadónak marad élete: "+player1.getBoard().get(attackerMinion).getHealthPoint());
-//		System.out.println("Támadottnak marad élete: "+player2.getBoard().get(boardIndex).getHealthPoint());
-		removeDeadMinionsFromTheBoard(player1);
-		removeDeadMinionsFromTheBoard(player2);
-	
-		refreshBoardImages(player1, boardImgs);
-		refreshBoardImages(player2, boardImgsOpponent);
-		
-		refreshMinionBars(player1, ownHandMinionBars);
-		refreshMinionBars(player2, opponentHandMinionBars);
-		
+	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) {
+		if (player1.getBoard().get(choose1).getAttackNow() == 1) {
+			player1.getBoard().get(choose1).setHealthPoint(player1.getBoard().get(choose1).getHealthPoint()- player2.getBoard().get(boardIndex).getAttackPower());
+			player2.getBoard().get(boardIndex).setHealthPoint(player2.getBoard().get(boardIndex).getHealthPoint()- player1.getBoard().get(choose1).getAttackPower());
+			player1.getBoard().get(choose1).setAttackNow(0);
+
+			
+
+
+			removeDeadMinionsFromTheBoard(player1);
+			removeDeadMinionsFromTheBoard(player2);
+
+			refreshBoardImages(player1, boardImgs);
+			refreshBoardImages(player2, boardImgsOpponent);
+
+			refreshMinionBars(player1, ownHandMinionBars);
+			refreshMinionBars(player2, opponentHandMinionBars);
+			
+			refreshBoardRectangles(player1);
+		}
 	}
 	
 	private void refreshMinionBars(Player player, Text[] textArray) {
@@ -108,6 +111,16 @@ public class GameTableController {
 		}
 		for (int i = player.getBoard().size(); i < 6; i++) {			
 			textArray[i].setText("");
+		}
+	}
+	
+	private void refreshBoardRectangles(Player player) {		
+		for (int i = 0; i < player.getBoard().size(); i++) {
+			if (player.getBoard().get(i).getAttackNow()==1) {
+				boardRectangles[i].setStroke(Color.GREEN);
+			}else {
+				boardRectangles[i].setStroke(Color.RED);				
+			}
 		}
 	}
 	
@@ -180,6 +193,14 @@ public class GameTableController {
 			refreshMinionBars(c.getPlayer1(), ownHandMinionBars);
 			refreshMinionBars(c.getPlayer2(), opponentHandMinionBars);
 			
+			boardRectangles[0]=boardRectangle1;
+			boardRectangles[1]=boardRectangle2;
+			boardRectangles[2]=boardRectangle3;
+			boardRectangles[3]=boardRectangle4;
+			boardRectangles[4]=boardRectangle5;
+			boardRectangles[5]=boardRectangle6;
+			refreshBoardRectangles(c.getPlayer1());
+			
 		
 			
 		}
@@ -247,10 +268,15 @@ public class GameTableController {
 			refreshMinionBars(c.getPlayer2(), ownHandMinionBars);
 			refreshMinionBars(c.getPlayer1(), opponentHandMinionBars);
 			
+			boardRectangles[0]=boardRectangle1;
+			boardRectangles[1]=boardRectangle2;
+			boardRectangles[2]=boardRectangle3;
+			boardRectangles[3]=boardRectangle4;
+			boardRectangles[4]=boardRectangle5;
+			boardRectangles[5]=boardRectangle6;
 			
-					
+			refreshBoardRectangles(c.getPlayer2());
 		}
-
 	}
 	
 	
@@ -261,7 +287,7 @@ public class GameTableController {
 //			
 //		}
 //		if(Integer.parseInt(client.getPlayer())==2) {// && c.getActualPlayer()==1
-//			c.setActualPlayer(0);			
+//			c.setActualPlayer(0);		
 //			
 //		}
 		
@@ -275,6 +301,11 @@ public class GameTableController {
 			c.getPlayer2().getDeck().remove(0);
 			refreshTheHandImages(c.getPlayer2());
 			//sender.mOut.println("ENTURNBIATCH");
+			for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
+				c.getPlayer2().getBoard().get(i).setAttackNow(1);
+			}
+			refreshBoardRectangles(c.getPlayer2());
+			
 			
 		} else {
 			if (c.getActualPlayer()==1) {
@@ -288,6 +319,11 @@ public class GameTableController {
 				ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
 				
 				refreshTheHandImages(c.getPlayer1());
+				
+				for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
+					c.getPlayer1().getBoard().get(i).setAttackNow(1);
+				}
+				refreshBoardRectangles(c.getPlayer1());
 			}	
 		}
 		
@@ -377,57 +413,58 @@ public class GameTableController {
 	@FXML
 	public void clickOnOpponentBoard1() {		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 0, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 0);
+			
 		}		
 		if(Integer.parseInt(client.getPlayer())==2) {
-			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 0,choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 0);
 		}	
 			
 	}
 	@FXML
 	public void clickOnOpponentBoard2() {		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 1, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 1);
 		}		
 		if(Integer.parseInt(client.getPlayer())==2) {
-			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 1, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 1);
 		}	
 		
 	}
 	@FXML
 	public void clickOnOpponentBoard3() {		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 2, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 2);
 		}		
 		if(Integer.parseInt(client.getPlayer())==2) {
-			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 2, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 2);
 		}		
 	}
 	@FXML
 	public void clickOnOpponentBoard4() {		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 3, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 3);
 		}		
 		if(Integer.parseInt(client.getPlayer())==2) {
-			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 3, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 3);
 		}		
 	}
 	@FXML
 	public void clickOnOpponentBoard5() {		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 4, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 4);
 		}		
 		if(Integer.parseInt(client.getPlayer())==2) {
-			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 4, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 4);
 		}		
 	}
 	@FXML
 	public void clickOnOpponentBoard6() {		
 		if(Integer.parseInt(client.getPlayer())==1) {
-			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 5, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer1(), c.getPlayer2(), 5);
 		}		
 		if(Integer.parseInt(client.getPlayer())==2) {
-			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 5, choose1);
+			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 5);
 		}		
 	}
 	@FXML
@@ -483,6 +520,18 @@ public class GameTableController {
 	public Text opponentHandMinionBar5;
 	@FXML
 	public Text opponentHandMinionBar6;
+	@FXML
+	public Rectangle boardRectangle1;
+	@FXML
+	public Rectangle boardRectangle2;
+	@FXML
+	public Rectangle boardRectangle3;
+	@FXML
+	public Rectangle boardRectangle4;
+	@FXML
+	public Rectangle boardRectangle5;
+	@FXML
+	public Rectangle boardRectangle6;
 	
 	
 	public ImageView handImgs[]=new ImageView[5];
@@ -491,6 +540,7 @@ public class GameTableController {
 	
 	public Text ownHandMinionBars[] = new Text[6];
 	public Text opponentHandMinionBars[] = new Text[6];
+	public Rectangle boardRectangles[] = new Rectangle[6];
 	
 	
 	@FXML
@@ -505,8 +555,7 @@ public class GameTableController {
 	public ImageView ownBoard5;
 	@FXML
 	public ImageView ownBoard6;
-	
-	
+		
 	@FXML
 	public ImageView heroFace;
 	@FXML
@@ -524,8 +573,6 @@ public class GameTableController {
 	public ImageView opponentBoard5;
 	@FXML
 	public ImageView opponentBoard6;
-
-	
 	
 	@FXML 
 	public Text ownDeckCounter; 
@@ -633,9 +680,6 @@ public class GameTableController {
 	public void initData(Core core,Client client, Sender sender) {
 		this.c=core;
 		this.sender=sender;
-		this.client=client;
-	        
-	}
-	
-	
+		this.client=client;	        
+	}	
 }

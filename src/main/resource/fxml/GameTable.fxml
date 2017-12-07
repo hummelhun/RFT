@@ -26,12 +26,12 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="713.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="878.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="1043.0" layoutY="284.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="219.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="383.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="548.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="713.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="878.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="1043.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle fx:id="boardRectangle1" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="219.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle fx:id="boardRectangle2" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="383.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle fx:id="boardRectangle3" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="548.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle fx:id="boardRectangle4" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="713.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle fx:id="boardRectangle5" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="878.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
+            <Rectangle fx:id="boardRectangle6" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="141.0" layoutX="1043.0" layoutY="475.0" stroke="#e10000" strokeType="INSIDE" width="121.0" />
             <Button fx:id="startButton" layoutX="1310.0" layoutY="845.0" mnemonicParsing="false" onAction="#startGame" prefHeight="55.0" prefWidth="130.0" text="Start" />
             <ImageView fx:id="heroFace" fitHeight="130.0" fitWidth="140.0" layoutX="628.0" layoutY="683.0" pickOnBounds="true" preserveRatio="true" />
             <ImageView fx:id="ownHand4" fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand4" onMouseEntered="#feltolOH4" onMouseExited="#letolOH4" pickOnBounds="true" preserveRatio="true">

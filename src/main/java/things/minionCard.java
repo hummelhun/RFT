@@ -30,7 +30,7 @@ public class MinionCard extends Card{
 	}
 
 
-	public int isAttackNow() {
+	public int getAttackNow() {
 		return attackNow;
 	}
 

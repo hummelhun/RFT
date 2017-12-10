@@ -135,14 +135,14 @@ public class Core {
 	  	  player2.getHand().add(player2.getDeck().get(0));
 		  player2.getDeck().remove(0);
 		}
-		player1.getBoard().add(new MinionCard("Murloc Raider", 1, "", "Murloc_Raider.png", 2, 1, 0));
+		player1.getBoard().add(new MinionCard("Murloc Raider", 1, "", "Murloc_Raider.png", 2, 100, 0));
 		player1.getBoard().add(new MinionCard("Bloodfen Raptor", 2, "", "Bloodfen_Raptor.png",3, 2, 0));
 		player1.getBoard().add(new MinionCard("River Crocolisk", 2, "", "River_Crocolisk.png", 2, 3, 0));
 //		player1.getBoard().add(new MinionCard("Murloc Raider", 1, "", "Murloc_Raider.png", 2, 1, 0));
 		player1.getBoard().add(new MinionCard("Bluegill Warrior", 2, "Charge", "Bluegill_Warrior.png", 2, 1, 1));
 
 
-		player2.getBoard().add(new MinionCard("Murloc Raider", 1, "", "Murloc_Raider.png", 2, 1, 0));
+		player2.getBoard().add(new MinionCard("Murloc Raider", 1, "", "Murloc_Raider.png", 2, 100, 0));
 		player2.getBoard().add(new MinionCard("Bluegill Warrior", 2, "Charge", "Bluegill_Warrior.png", 2, 1, 1));
 //		player2.getBoard().add(new MinionCard("Bloodfen Raptor", 2, "", "Bloodfen_Raptor.png",3, 2, 0));
 		player2.getBoard().add(new MinionCard("River Crocolisk", 2, "", "River_Crocolisk.png", 2, 3, 0));

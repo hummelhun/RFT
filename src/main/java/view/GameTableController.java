@@ -138,23 +138,7 @@ public class GameTableController {
 		c.startGame();
 		startButton.setVisible(false);
 		IntegerProperty i = new SimpleIntegerProperty(0);	
-		Timeline timeline = new Timeline(
-		    new KeyFrame(Duration.seconds(1),
-		        event -> {		        	
-		            i.set(i.get() + 1);
-		            if(i.get()==60) {
-		            	min++;
-		            	i.set(0);
-		            }
-		            if(i.get()<10) {
-		            	timeElapse.setText("0"+min+":0" + i.get());
-		            }else
-		            	timeElapse.setText("0"+min+":" + i.get());
-		        } 
-		    )
-		);
-		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.play();
+
 		
 		
 		if(Integer.parseInt(client.getPlayer())==1) {
@@ -310,6 +294,8 @@ public class GameTableController {
 			
 			refreshBoardRectangles(c.getPlayer2());
 		}
+		System.out.println("MOTHERFUCKER");
+		sender.setMassage("asd");
 	}
 	
 	

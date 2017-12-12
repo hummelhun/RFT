@@ -28,7 +28,7 @@ public class ClientListener extends Thread
                mServerDispatcher.dispatchMessage(mClientInfo, message);
            }
         } catch (IOException ioex) {
-           // Problem reading from socket (communication is broken)
+          System.out.println("shit happened!"); // Problem reading from socket (communication is broken)
         }
  
         // Communication is broken. Interrupt both listener and sender threads

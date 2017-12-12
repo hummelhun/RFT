@@ -25,6 +25,7 @@ public class ClientListener extends Thread
                String message = mIn.readLine();
                if (message == null)
                    break;
+               System.out.println(message);
                mServerDispatcher.dispatchMessage(mClientInfo, message);
            }
         } catch (IOException ioex) {

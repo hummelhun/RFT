@@ -65,6 +65,8 @@ public class GameTableController {
 			refreshBoardRectangles(player);
 			
 		}
+		System.out.println("put");
+		sender.setMassage("asd");
 	}
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {
@@ -85,6 +87,8 @@ public class GameTableController {
 			
 			refreshBoardRectangles(player1);
 		}
+		System.out.println("attack");
+		sender.setMassage("ATTACK");
 	}
 	public void refreshTheHandImages(Player player) {
 	    for (int i = 0; i < player.getHand().size(); i++) {		    	
@@ -138,7 +142,7 @@ public class GameTableController {
 		c.startGame();
 		startButton.setVisible(false);
 		IntegerProperty i = new SimpleIntegerProperty(0);	
-		Timeline timeline = new Timeline(
+		/*Timeline timeline = new Timeline(
 		    new KeyFrame(Duration.seconds(1),
 		        event -> {		        	
 		            i.set(i.get() + 1);
@@ -154,7 +158,7 @@ public class GameTableController {
 		    )
 		);
 		timeline.setCycleCount(Animation.INDEFINITE);
-		timeline.play();
+		timeline.play();*/
 		
 		
 		if(Integer.parseInt(client.getPlayer())==1) {
@@ -310,6 +314,7 @@ public class GameTableController {
 			
 			refreshBoardRectangles(c.getPlayer2());
 		}
+		sender.setMassage("asd");
 	}
 	
 	

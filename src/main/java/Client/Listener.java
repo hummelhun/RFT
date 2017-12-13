@@ -31,9 +31,13 @@ public class Listener extends Thread {
 		        	   
 		        	   String[] result = message.split(" | ");
 		               System.out.println(message);
-		               System.out.println(result[0]);
+		               //System.out.println(result[0]);
 		               switch(result[0]){
 		               case "PLAYER": {GameTableController.client.setPlayer(result[2]);} break;
+		               case "ENDTURN": {/*if(GameTableController.c.setActualPlayer();*/} break;
+		               case "ATTACK": break;
+		               case "ATTACKHERO": break;
+		               case "PUT": break;
 		               }
 		           }
 				}

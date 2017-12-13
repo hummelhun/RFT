@@ -36,7 +36,7 @@ public class GameTableController {
 	public volatile static String player;
 	int min =0 ;
 
-	Core c = new Core();
+	public static Core c = new Core();
 	public static Client client = new Client();
 	Sender sender = new Sender();
 	Listener listener = new Listener();
@@ -65,6 +65,7 @@ public class GameTableController {
 			refreshBoardRectangles(player);
 			
 		}
+		sender.setMassage("PUT");
 	}
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {
@@ -85,6 +86,7 @@ public class GameTableController {
 			
 			refreshBoardRectangles(player1);
 		}
+		sender.setMassage("ATTACK");
 	}
 	public void refreshTheHandImages(Player player) {
 	    for (int i = 0; i < player.getHand().size(); i++) {		    	
@@ -347,7 +349,7 @@ public class GameTableController {
 		}
 		
 		
-		
+		sender.setMassage("ENDTURN");
 	}
 	
 	@FXML
@@ -510,7 +512,7 @@ public class GameTableController {
 
 			}
 		}
-
+		sender.setMassage("HEROATTACK");
 	}
 	
 	@FXML

@@ -44,12 +44,12 @@ public class Sender extends Thread {
 			//System.out.println("----- Log for System.out: -----\n" + lpsOut.buf);
 			String message = lpsOut.buf.toString();
 			lpsOut.buf.delete( 0, lpsOut.buf.length() );*/
-			if(massage.contains("asd"))
+			if(massage != null)
 			{
 				System.out.println("ITTVAGYOK");
 		    mOut.println(massage);
 			mOut.flush();
-			massage="";
+			massage=null;
 			}
 			
 			

@@ -49,7 +49,7 @@ public class GameTableController {
 			}
 		}
 	}	
-	private void clickOnOwnHandWithIndex(Player player, int index) {
+	public void clickOnOwnHandWithIndex(Player player, int index) {
 		if (player.getHand().get(index) != null && player.getActualMana()>=player.getHand().get(index).getManaCost()) {
 			player.getBoard().add(player.getHand().get(index));
 			Image img = new Image(player.getHand().get(index).getFileName());
@@ -65,7 +65,11 @@ public class GameTableController {
 			refreshBoardRectangles(player);
 			
 		}
-		sender.setMassage("PUT");
+		if(Integer.parseInt(client.getPlayer())==1){
+		sender.setMassage("PUT" + " | " + "1" + " | " + index);
+		}else{
+			sender.setMassage("PUT" + " | " + "2" + " | " + index);
+		}
 	}
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {

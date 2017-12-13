@@ -26,6 +26,7 @@ public class Main extends Application{
 	public static Client client = new Client("127.0.0.1", 8005);
 	Sender sender = new Sender();
 	Listener listener = new Listener();
+	public static GameTableController controller;
 	public Main() {
 	}
 	public Stage getPrimaryStage() {
@@ -69,7 +70,7 @@ public class Main extends Application{
 			AnchorPane pane;
 			pane = (AnchorPane) loader.load();
 			mainMenu.setCenter(pane);
-			GameTableController controller = loader.getController();
+			controller = loader.getController();
 			controller.initData(core,client,sender);
 			
 			controller.setMain(this);

@@ -77,6 +77,8 @@ public class GameTableController {
 		  Image img = new Image(player.getHand().get(index).getFileName());
 		  boardImgsOpponent[player.getBoard().size()-1].setImage(img);
 		  player.getHand().remove(index);
+		  
+		  refreshBoardImages(player, boardImgsOpponent);
 		 }
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {

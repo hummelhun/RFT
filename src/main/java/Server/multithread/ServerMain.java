@@ -48,10 +48,10 @@ public class ServerMain {
 	                serverDispatcher.addClient(clientInfo);
 	                //System.out.println("player num: " + playerN);
 	                System.out.println("Client connected on socket!");
-	               /* if(playerN <2){
+	                if(playerN <2){
 	                playerN++;
 	                
-	                }*/
+	                }
 	                 
 	                ///////////////////////////
 	                //here comes the logic!

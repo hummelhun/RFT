@@ -22,14 +22,14 @@ public class Sender extends Thread {
 	public void run() {
 		//Doing some fucked up stuff
    try{
-	   BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	   /*BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		while (!isInterrupted()) {
 			String message = in.readLine();
 			mOut.println(message);
 			mOut.flush();
-		}
+		}*/
 	   
-		/*while (!isInterrupted()) {	
+		while (!isInterrupted()) {	
 			while(massage == null){ 
 			     try {
 					//nothing just SLEEP you mofo
@@ -45,11 +45,11 @@ public class Sender extends Thread {
 			}
 			
 			
-		}*/
+		}
 	
-	}/*finally{}*/catch (IOException ioe) {
+	}finally{}/*catch (IOException ioe) {
 
-	}
+	}*/
 	}
 	public void setMassage(String s){
 		this.massage=s;

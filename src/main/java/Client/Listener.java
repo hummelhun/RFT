@@ -51,8 +51,7 @@ public class Listener extends Thread {
 		               case "ENDTURN": {/*if(GameTableController.c.setActualPlayer();*/} break;
 		               case "ATTACK": break;
 		               case "ATTACKHERO": break;
-		               case "PUT": {Main.controller.clickOnOwnHandWithIndex(player, Integer.parseInt(result[4]));
-		               Main.controller.putCardToTheBoard(player, Integer.parseInt(result[4]));
+		               case "PUT": {Main.controller.putCardToTheBoard(player, Integer.parseInt(result[4]));
 		               }break;
 		               }
 		           }

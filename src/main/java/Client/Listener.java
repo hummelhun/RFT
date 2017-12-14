@@ -41,6 +41,7 @@ public class Listener extends Thread {
 		               if(result.length>=4){
 		               System.out.println("result[2]: "+result[2]);
 		               System.out.println("result[4]: "+result[4]);
+		               
 		               if(Integer.parseInt(result[4]) == 1){
 		            	   player = GameTableController.c.getPlayer1();
 		               }else{player = GameTableController.c.getPlayer2();}
@@ -50,7 +51,9 @@ public class Listener extends Thread {
 		               case "ENDTURN": {/*if(GameTableController.c.setActualPlayer();*/} break;
 		               case "ATTACK": break;
 		               case "ATTACKHERO": break;
-		               case "PUT": {Main.controller.clickOnOwnHandWithIndex(player, Integer.parseInt(result[4]));}break;
+		               case "PUT": {Main.controller.clickOnOwnHandWithIndex(player, Integer.parseInt(result[4]));
+		               Main.controller.putCardToTheBoard(player, Integer.parseInt(result[4]));
+		               }break;
 		               }
 		           }
 				}

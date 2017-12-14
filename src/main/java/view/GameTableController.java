@@ -70,7 +70,14 @@ public class GameTableController {
 		}else{
 			sender.setMassage("PUT" + " | " + "2" + " | " + index);
 		}
+		
 	}
+	 public void putCardToTheBoard(Player player, int index) {
+		  player.getBoard().add(player.getHand().get(index));
+		  Image img = new Image(player.getHand().get(index).getFileName());
+		  boardImgsOpponent[player.getBoard().size()-1].setImage(img);
+		  player.getHand().remove(index);
+		 }
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {
 			player1.getBoard().get(choose1).setHealthPoint(player1.getBoard().get(choose1).getHealthPoint()- player2.getBoard().get(boardIndex).getAttackPower());

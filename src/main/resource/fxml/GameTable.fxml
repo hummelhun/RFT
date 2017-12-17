@@ -155,11 +155,11 @@
                </image>
             </ImageView>
             <Text fx:id="ownDeckCounter" fill="#edff00" layoutX="1293.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Own CC" wrappingWidth="100.0" />
-            <Text fx:id="player1HealtText" fill="RED" layoutX="705.0" layoutY="756.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OwnHP" wrappingWidth="100.0">
+            <Text fx:id="player1HealtText" fill="WHITE" layoutX="755.0" layoutY="730.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OwnHP" wrappingWidth="100.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Text>
-            <Text fx:id="player2HealtText" fill="RED" layoutX="705.0" layoutY="233.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OpponentHP" wrappingWidth="198.0">
+            <Text fx:id="player2HealtText" fill="WHITE" layoutX="757.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OpponentHP" wrappingWidth="198.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Text>

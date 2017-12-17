@@ -26,6 +26,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import things.MinionCard;
 import things.Player;
 
 public class GameTableController {
@@ -59,10 +60,10 @@ public class GameTableController {
 			manaBar1.setText("Mana: "+player.getActualMana()+"/"+player.getMana());
 			player.getHand().remove(index);
 			
-			refreshTheHandImages(player);
+			refreshTheHandImages(player, handImgs);
 			refreshBoardImages(player, boardImgs);
 			refreshMinionBars(player, ownHandMinionBars);			
-			refreshBoardRectangles(player);
+			
 			
 		}
 		if(Integer.parseInt(client.getPlayer())==1){
@@ -72,14 +73,13 @@ public class GameTableController {
 		}
 		
 	}
-	 public void putCardToTheBoard(Player player, int index) {
-		  player.getBoard().add(player.getHand().get(index));
-		  Image img = new Image(player.getHand().get(index).getFileName());
-		  boardImgsOpponent[player.getBoard().size()-1].setImage(img);
-		  player.getHand().remove(index);
-		  
-		  refreshBoardImages(player, boardImgsOpponent);
-		 }
+	public void putCardToTheBoard(Player player, int index) {
+		player.getBoard().add(player.getHand().get(index));
+		boardImgsOpponent[player.getBoard().size() - 1].setVisible(true);
+		player.getHand().remove(index);
+		refreshBoardImages(player, boardImgsOpponent);
+		refreshMinionBars(player, opponentHandMinionBars);
+	}
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {
 			player1.getBoard().get(choose1).setHealthPoint(player1.getBoard().get(choose1).getHealthPoint()- player2.getBoard().get(boardIndex).getAttackPower());
@@ -99,18 +99,24 @@ public class GameTableController {
 			
 			refreshBoardRectangles(player1);
 		}
-		sender.setMassage("ATTACK");
+		if(Integer.parseInt(client.getPlayer())==1){
+			sender.setMassage("ATTACK" + " | " + "1" + " | " + choose1 + "|" + boardIndex);
+		}
+		else{
+			sender.setMassage("ATTACK" + " | " + "2" + " | " + choose1 + "|" + boardIndex);
+		}
+		
 	}
-	public void refreshTheHandImages(Player player) {
+	public void refreshTheHandImages(Player player, ImageView[] imagearray) {
 	    for (int i = 0; i < player.getHand().size(); i++) {		    	
 	    	Image img = new Image(player.getHand().get(i).getFileName()); 
-			handImgs[i].setImage(img);
-			handImgs[i].setVisible(true);
+	    	imagearray[i].setImage(img);
+	    	imagearray[i].setVisible(true);
 			
 		}
 	    for (int i = player.getHand().size(); i < 5; i++) {
-	    	handImgs[i].setImage(hatlap);
-	    	handImgs[i].setVisible(false);
+	    	imagearray[i].setImage(hatlap);
+	    	imagearray[i].setVisible(false);
 		}
 	}	
 	public void refreshBoardImages(Player player, ImageView[] imagearray) {
@@ -152,8 +158,6 @@ public class GameTableController {
 		System.out.println("ÉN VAGYOK A " + client.getPlayer() + " JÁTÉKOS!");
 		c.startGame();
 		startButton.setVisible(false);
-		IntegerProperty i = new SimpleIntegerProperty(0);	
-
 		
 		
 		if(Integer.parseInt(client.getPlayer())==1) {
@@ -186,7 +190,7 @@ public class GameTableController {
 			handImgs[4]=ownHand5;
 			
 //			refreshTheHandImages(c.getPlayer2());
-			refreshTheHandImages(c.getPlayer1());
+			refreshTheHandImages(c.getPlayer1(), handImgs);
 			
 			boardImgs[0]=ownBoard1;
 			boardImgs[1]=ownBoard2;
@@ -264,7 +268,7 @@ public class GameTableController {
 			handImgs[4]=ownHand5;
 			
 //			refreshTheHandImages(c.getPlayer1());
-			refreshTheHandImages(c.getPlayer2());
+			refreshTheHandImages(c.getPlayer2(), handImgs);
 			
 			boardImgs[0]=ownBoard1;
 			boardImgs[1]=ownBoard2;
@@ -309,60 +313,108 @@ public class GameTableController {
 			
 			refreshBoardRectangles(c.getPlayer2());
 		}
-		System.out.println("MOTHERFUCKER");
-		sender.setMassage("asd");
+//		System.out.println("MOTHERFUCKER");
+//		sender.setMassage("asd");
 	}
 	
-	
+	public void endTurnButtonOtherSide(Player player, int actualPlayer) {
+		if (actualPlayer==2) {
+			c.setActualPlayer(1);	
+		}
+		else {
+			c.setActualPlayer(0);
+		}
+
+		player.getHand().add(player.getDeck().get(0));
+		player.getDeck().remove(0);
+		player.setMana(player.getMana() + 1);
+		player.setActualMana(player.getMana());
+		manaBar1.setText("Mana: " + player.getActualMana() + " /" + player.getMana());
+		refreshTheHandImages(player, handImgs);
+		for (int i = 0; i < player.getBoard().size(); i++) {
+			player.getBoard().get(i).setAttackNow(1);
+		}
+		refreshBoardRectangles(player);
+		
+	}
 	@FXML
 	public void endTurnButton() {
-//		if(Integer.parseInt(client.getPlayer())==1) {//&& c.getActualPlayer()==0
-//			c.setActualPlayer(1);
-//			
-//		}
-//		if(Integer.parseInt(client.getPlayer())==2) {// && c.getActualPlayer()==1
-//			c.setActualPlayer(0);		
-//			
-//		}
 		
-		if (c.getActualPlayer()==0) {
+		if (Integer.parseInt(client.getPlayer()) == 1 && c.getActualPlayer() == 0) {
+
 			c.setActualPlayer(1);
-			c.getPlayer2().setMana(c.getPlayer2().getMana()+1);
-			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
-			manaBar2.setText("Mana: "+c.getPlayer2().getActualMana()+" /"+c.getPlayer2().getMana());
-			System.out.println(c.getActualPlayer());
 			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
 			c.getPlayer2().getDeck().remove(0);
-			refreshTheHandImages(c.getPlayer2());
-			//sender.mOut.println("ENTURNBIATCH");
-			for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
-				c.getPlayer2().getBoard().get(i).setAttackNow(1);
-			}
-			refreshBoardRectangles(c.getPlayer2());
+			c.getPlayer2().setMana(c.getPlayer2().getMana() + 1);
+			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
+
+			manaBar2.setText("Mana: " + c.getPlayer2().getActualMana() + " /" + c.getPlayer2().getMana());
+//			refreshTheHandImages(c.getPlayer2(), handImgs);
+//			for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
+//				c.getPlayer2().getBoard().get(i).setAttackNow(1);
+//			}
+//			refreshBoardRectangles(c.getPlayer2());
+			System.out.println("1!!!");
 			
-			
-		} else {
-			if (c.getActualPlayer()==1) {
-				c.setActualPlayer(0);
-				c.getPlayer1().setMana(c.getPlayer1().getMana()+1);
-				c.getPlayer1().setActualMana(c.getPlayer1().getMana());
-				manaBar1.setText("Mana: "+c.getPlayer1().getActualMana()+" /"+c.getPlayer1().getMana());
-				System.out.println(c.getActualPlayer());
-				c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
-				c.getPlayer1().getDeck().remove(0);
-				ownDeckCounter.setText("Cards left: "+c.getPlayer1().getDeck().size());
-				
-				refreshTheHandImages(c.getPlayer1());
-				
-				for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
-					c.getPlayer1().getBoard().get(i).setAttackNow(1);
-				}
-				refreshBoardRectangles(c.getPlayer1());
-			}	
+		}else
+		if (Integer.parseInt(client.getPlayer()) == 1 && c.getActualPlayer() == 1) {
+			c.setActualPlayer(0);
+			c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
+			c.getPlayer1().getDeck().remove(0);
+			c.getPlayer1().setMana(c.getPlayer1().getMana() + 1);
+			c.getPlayer1().setActualMana(c.getPlayer1().getMana());
+
+			manaBar2.setText("Mana: " + c.getPlayer1().getActualMana() + " /" + c.getPlayer1().getMana());
+//			refreshTheHandImages(c.getPlayer1(), handImgs);
+//			for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
+//				c.getPlayer1().getBoard().get(i).setAttackNow(1);
+//			}
+//			refreshBoardRectangles(c.getPlayer1());
+			System.out.println("2!!!");
 		}
 		
 		
-		sender.setMassage("ENDTURN");
+		if (Integer.parseInt(client.getPlayer()) == 2 && c.getActualPlayer() == 0) {
+
+			c.setActualPlayer(1);
+			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
+			c.getPlayer2().getDeck().remove(0);
+			c.getPlayer2().setMana(c.getPlayer2().getMana() + 1);
+			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
+
+			manaBar2.setText("Mana: " + c.getPlayer2().getActualMana() + " /" + c.getPlayer2().getMana());
+//			refreshTheHandImages(c.getPlayer2(), handImgs);
+//			for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
+//				c.getPlayer2().getBoard().get(i).setAttackNow(1);
+//			}
+//			refreshBoardRectangles(c.getPlayer2());
+			System.out.println("3!!!");
+		}
+		else
+
+		if (Integer.parseInt(client.getPlayer()) == 2 && c.getActualPlayer() == 1) {
+			c.setActualPlayer(0);
+			c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
+			c.getPlayer1().getDeck().remove(0);
+			c.getPlayer1().setMana(c.getPlayer1().getMana() + 1);
+			c.getPlayer1().setActualMana(c.getPlayer1().getMana());
+
+			manaBar1.setText("Mana: " + c.getPlayer1().getActualMana() + " /" + c.getPlayer1().getMana());
+//			refreshTheHandImages(c.getPlayer1(), handImgs);
+//			for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
+//				c.getPlayer1().getBoard().get(i).setAttackNow(1);
+//			}
+//			refreshBoardRectangles(c.getPlayer1());
+			System.out.println("4!!!");
+		}
+		
+		
+		if(Integer.parseInt(client.getPlayer())==1){
+		sender.setMassage("ENDTURN" + " | " + "1" + " | ");
+		}else{
+			sender.setMassage("ENDTURN" + " | " + "2" + " | ");
+		}
+//		sender.setMassage("ENDTURN");
 	}
 	
 	@FXML
@@ -502,33 +554,44 @@ public class GameTableController {
 			clickOnOpponentBoardWithIndex(c.getPlayer2(), c.getPlayer1(), 5);
 		}		
 	}
-	@FXML
-	public void clickOnOpponentFace() {
-		if(Integer.parseInt(client.getPlayer())==1) {
-			if(c.getPlayer1().getBoard().get(choose1).getAttackNow()==1) {
-			c.getPlayer2().setHealtPoint(c.getPlayer2().getHealtPoint()-c.getPlayer1().getBoard().get(choose1).getAttackPower());
-			c.getPlayer1().getBoard().get(choose1).setAttackNow(0);
-			player2HealtText.setText(""+c.getPlayer2().getHealtPoint());
-			refreshBoardRectangles(c.getPlayer1());
-
-			}
-			
-		}
+	
+	public void clickOnOpponentFaceOtherSide(Player player, int minionAttack) {
+//		System.out.println("playerID: "+player.getId());
+		System.out.println("elõtte HP: "+player.getHealtPoint());
+		player.setHealtPoint(player.getHealtPoint()- minionAttack);
+		System.out.println("utána HP: "+player.getHealtPoint());
+		player1HealtText.setText(""+player.getHealtPoint());
 		
-		if(Integer.parseInt(client.getPlayer())==2) {
-			if(c.getPlayer2().getBoard().get(choose1).getAttackNow()==1) {
-			c.getPlayer1().setHealtPoint(c.getPlayer1().getHealtPoint()-c.getPlayer2().getBoard().get(choose1).getAttackPower());
-			c.getPlayer2().getBoard().get(choose1).setAttackNow(0);
-			player2HealtText.setText(""+c.getPlayer1().getHealtPoint());
-			refreshBoardRectangles(c.getPlayer1());
-			
-
-			}
-		}
-		sender.setMassage("HEROATTACK");
 	}
 	
+	
 	@FXML
+	public void clickOnOpponentFace() {
+		if (Integer.parseInt(client.getPlayer()) == 1) {
+			if (c.getPlayer1().getBoard().get(choose1).getAttackNow() == 1) {
+				c.getPlayer2().setHealtPoint(c.getPlayer2().getHealtPoint() - c.getPlayer1().getBoard().get(choose1).getAttackPower());
+				c.getPlayer1().getBoard().get(choose1).setAttackNow(0);
+				player2HealtText.setText("" + c.getPlayer2().getHealtPoint());
+				refreshBoardRectangles(c.getPlayer1());
+			}
+		}
+		if (Integer.parseInt(client.getPlayer()) == 2) {
+			if (c.getPlayer2().getBoard().get(choose1).getAttackNow() == 1) {
+				c.getPlayer1().setHealtPoint(c.getPlayer1().getHealtPoint() - c.getPlayer2().getBoard().get(choose1).getAttackPower());
+				c.getPlayer2().getBoard().get(choose1).setAttackNow(0);
+				player2HealtText.setText("" + c.getPlayer1().getHealtPoint());
+				refreshBoardRectangles(c.getPlayer1());
+			}
+		}
+		if(Integer.parseInt(client.getPlayer())==1){
+			sender.setMassage("HEROATTACK" + " | " + "1" + " | "+ c.getPlayer1().getBoard().get(choose1).getAttackPower());
+		}
+		else{
+			sender.setMassage("HEROATTACK" + " | " + "2" + " | "+ c.getPlayer2().getBoard().get(choose1).getAttackPower());
+		}
+	}
+	
+ 	@FXML
 	public ImageView ownHand1;
 	@FXML
 	public ImageView ownHand2;

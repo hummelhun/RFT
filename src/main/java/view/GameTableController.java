@@ -50,6 +50,7 @@ public class GameTableController {
 			}
 		}
 	}	
+	
 	public void clickOnOwnHandWithIndex(Player player, int index) {
 		if (player.getHand().get(index) != null && player.getActualMana()>=player.getHand().get(index).getManaCost()) {
 			player.getBoard().add(player.getHand().get(index));
@@ -62,17 +63,16 @@ public class GameTableController {
 			
 			refreshTheHandImages(player, handImgs);
 			refreshBoardImages(player, boardImgs);
-			refreshMinionBars(player, ownHandMinionBars);			
-			
-			
+			refreshMinionBars(player, ownHandMinionBars);				
 		}
 		if(Integer.parseInt(client.getPlayer())==1){
-		sender.setMassage("PUT" + " | " + "1" + " | " + index);
-		}else{
-			sender.setMassage("PUT" + " | " + "2" + " | " + index);
+			sender.setMassage("PUT" + " | " + "1" + " | " + index);
 		}
-		
+		else{
+			sender.setMassage("PUT" + " | " + "2" + " | " + index);
+		}		
 	}
+	
 	public void putCardToTheBoard(Player player, int index) {
 		player.getBoard().add(player.getHand().get(index));
 		boardImgsOpponent[player.getBoard().size() - 1].setVisible(true);
@@ -80,33 +80,50 @@ public class GameTableController {
 		refreshBoardImages(player, boardImgsOpponent);
 		refreshMinionBars(player, opponentHandMinionBars);
 	}
+	
 	private void clickOnOpponentBoardWithIndex(Player player1, Player player2, int boardIndex) throws InterruptedException {
 		if (player1.getBoard().get(choose1).getAttackNow() == 1) {
 			player1.getBoard().get(choose1).setHealthPoint(player1.getBoard().get(choose1).getHealthPoint()- player2.getBoard().get(boardIndex).getAttackPower());
 			player2.getBoard().get(boardIndex).setHealthPoint(player2.getBoard().get(boardIndex).getHealthPoint()- player1.getBoard().get(choose1).getAttackPower());
 			player1.getBoard().get(choose1).setAttackNow(0);
-			
-			
+					
 			removeDeadMinionsFromTheBoard(player1);
 			removeDeadMinionsFromTheBoard(player2);
 
 			refreshBoardImages(player1, boardImgs);
 			refreshBoardImages(player2, boardImgsOpponent);
 			
-
 			refreshMinionBars(player1, ownHandMinionBars);
 			refreshMinionBars(player2, opponentHandMinionBars);
 			
 			refreshBoardRectangles(player1);
 		}
 		if(Integer.parseInt(client.getPlayer())==1){
-			sender.setMassage("ATTACK" + " | " + "1" + " | " + choose1 + "|" + boardIndex);
+			sender.setMassage("ATTACK" + " | " + "1" + " | " + choose1 + " | " + boardIndex);
 		}
 		else{
-			sender.setMassage("ATTACK" + " | " + "2" + " | " + choose1 + "|" + boardIndex);
-		}
-		
+			sender.setMassage("ATTACK" + " | " + "2" + " | " + choose1 + " | " + boardIndex);
+		}		
 	}
+	public void tradeOnOtherSide(Player player, Player player2, int attacker, int defender) {
+		System.out.println("player: " + player.getName());
+		System.out.println("player2: " + player2.getName());
+			
+		player.getBoard().get(attacker).setHealthPoint(player.getBoard().get(attacker).getHealthPoint()-player2.getBoard().get(defender).getAttackPower());
+		player2.getBoard().get(defender).setHealthPoint(player2.getBoard().get(defender).getHealthPoint()- player.getBoard().get(attacker).getAttackPower());
+
+		removeDeadMinionsFromTheBoard(player);
+		removeDeadMinionsFromTheBoard(player2);
+		
+		refreshBoardImages(player, boardImgs);
+		refreshBoardImages(player2, boardImgsOpponent);
+		
+		refreshMinionBars(player, ownHandMinionBars);
+		refreshMinionBars(player2, opponentHandMinionBars);
+		
+		System.out.println();
+	}
+	
 	public void refreshTheHandImages(Player player, ImageView[] imagearray) {
 	    for (int i = 0; i < player.getHand().size(); i++) {		    	
 	    	Image img = new Image(player.getHand().get(i).getFileName()); 
@@ -556,14 +573,9 @@ public class GameTableController {
 	}
 	
 	public void clickOnOpponentFaceOtherSide(Player player, int minionAttack) {
-//		System.out.println("playerID: "+player.getId());
-		System.out.println("elõtte HP: "+player.getHealtPoint());
 		player.setHealtPoint(player.getHealtPoint()- minionAttack);
-		System.out.println("utána HP: "+player.getHealtPoint());
-		player1HealtText.setText(""+player.getHealtPoint());
-		
+		player1HealtText.setText(""+player.getHealtPoint());		
 	}
-	
 	
 	@FXML
 	public void clickOnOpponentFace() {

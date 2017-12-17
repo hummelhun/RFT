@@ -33,6 +33,7 @@ public class Listener extends Thread {
 		        	   String[] result = message.split(" | ");
 		               System.out.println(message);
 		               Player player=null;
+		               Player player2=null;
 		               //System.out.println(result[0]);
 		               switch(result[0]){
 		               case "PLAYER": {GameTableController.client.setPlayer(result[2]);} break;
@@ -54,9 +55,21 @@ public class Listener extends Thread {
 			               	}
 		            	   else{
 		            		   player = GameTableController.c.getPlayer1();
+		            		   
 		            	   }			               
 		            	   Main.controller.endTurnButtonOtherSide(player, Integer.parseInt(result[4]));} break;
-		               case "ATTACK": break;
+		            	   
+		               case "ATTACK": {
+		            	   if(Integer.parseInt(result[4]) == 1){
+			            	   player = GameTableController.c.getPlayer2();
+			            	   player2 = GameTableController.c.getPlayer1();
+			               	}
+		            	   else{
+		            		   player = GameTableController.c.getPlayer1();
+		            		   player2 = GameTableController.c.getPlayer2();
+		            	   }		            	   
+		            	   Main.controller.tradeOnOtherSide(player, player2, Integer.parseInt(result[6]), Integer.parseInt(result[8]));}break;
+		               
 		               case "HEROATTACK": {
 		            	   if(Integer.parseInt(result[4]) == 1){
 			            	   player = GameTableController.c.getPlayer2();
@@ -65,6 +78,7 @@ public class Listener extends Thread {
 		            		   player = GameTableController.c.getPlayer1();
 		            	   }
 		            	   Main.controller.clickOnOpponentFaceOtherSide(player, Integer.parseInt(result[6]));}break;
+		            	   
 		               case "PUT": {Main.controller.putCardToTheBoard(player, Integer.parseInt(result[6]));}break;
 		               }
 		           }

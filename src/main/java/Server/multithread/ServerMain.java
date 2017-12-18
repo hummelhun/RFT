@@ -9,7 +9,8 @@ import cardGame.Core;
  
 public class ServerMain {
 	
-	static int playerN=1;
+	volatile static int playerN=1;
+	volatile static int connection=1;
 	
 	public static void main(String[] args) throws IOException {
 		System.out.println("Start of main");
@@ -33,6 +34,13 @@ public class ServerMain {
 	        
 	        while (true) {
 	            try {
+	            	if(playerN == 0){
+	            		System.out.println("set to basic");
+	            		connection = 1;
+	            		playerN = 1;
+	            	}
+	            	while(playerN == 2){ if (playerN<=1)break; System.out.println("que");};
+	            	System.out.println("Waiting for players!");
 	                Socket socket = serverSocket.accept();
 	                ClientInfo clientInfo = new ClientInfo();
 	                clientInfo.mSocket = socket;
@@ -46,24 +54,21 @@ public class ServerMain {
 	                clientListener.start();
 	                clientSender.start();
 	                serverDispatcher.addClient(clientInfo);
-	                //System.out.println("player num: " + playerN);
+	                System.out.println("player num: " + playerN);
 	                System.out.println("Client connected on socket!");
+	                
 	                if(playerN <2){
 	                playerN++;
-	                
 	                }
-	                 
-	                ///////////////////////////
-	                //here comes the logic!
-	                //or not.. :D
-	                ///////////////////////////
-	                
-	                Core core = new Core(); 
+	            	
 	                
 	            } catch (IOException ioe) {
 	                ioe.printStackTrace();
 	            }
 	         }
 
+	}
+	synchronized public static void change(){
+		ServerMain.playerN = playerN--;
 	}
 }

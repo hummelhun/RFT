@@ -26,12 +26,21 @@ public class ClientListener extends Thread
                if (message == null)
                    break;
                mServerDispatcher.dispatchMessage(mClientInfo, message);
+               if(ServerMain.connection==0){
+            	   System.out.println("ANYAD!");
+            	  throw new IOException();
+               }
            }
+           
         } catch (IOException ioex) {
           System.out.println("shit happened!"); // Problem reading from socket (communication is broken)
-        }
+        } 
  
         // Communication is broken. Interrupt both listener and sender threads
+        ServerMain.connection=0;
+        ServerMain.playerN--;
+        System.out.println("Online players:" + ServerMain.playerN);
+        System.out.println("Server connection state:" + ServerMain.connection);
         mClientInfo.mClientSender.interrupt();
         mServerDispatcher.deleteClient(mClientInfo);
     }

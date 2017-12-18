@@ -13,7 +13,7 @@ public class ServerDispatcher extends Thread {
     {
     	String message ="";
         mClients.add(aClientInfo);
-        message = "PLAYER | " + (playerN+1); 
+        message = "PLAYER | " + (playerN); 
         ClientInfo clientInfo = (ClientInfo) mClients.get(playerN);
         sendMessageToPlayer(message, clientInfo);
         playerN++;
@@ -25,6 +25,8 @@ public class ServerDispatcher extends Thread {
         int clientIndex = mClients.indexOf(aClientInfo);
         if (clientIndex != -1)
            mClients.removeElementAt(clientIndex);
+        
+        System.out.println("Client Disconnected");
     }
  
     public synchronized void dispatchMessage(ClientInfo aClientInfo, String aMessage)
@@ -67,6 +69,7 @@ public class ServerDispatcher extends Thread {
         try {
       
         	while (true) {
+        		if(playerN > 1) {
         	String message = getNextMessageFromQueue();
         	String[] result = message.split("|");
             System.out.println("result 0. element: "+result[0]);
@@ -76,6 +79,7 @@ public class ServerDispatcher extends Thread {
         	if(result[0].contentEquals("2")){
         		ClientInfo clientInfo = (ClientInfo) mClients.get(0);
         		 sendMessageToPlayer(message,clientInfo);
+        	}
         	}
         	}
         } catch (InterruptedException ie) {

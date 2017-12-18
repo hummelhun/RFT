@@ -70,13 +70,21 @@ public class GameTableController {
 		}
 		else{
 			sender.setMassage("PUT" + " | " + "2" + " | " + index);
-		}		
+		}
 	}
 	
 	public void putCardToTheBoard(Player player, int index) {
+		for (MinionCard minion : player.getHand()) {
+			System.out.println("player elõtte: "+ minion.getCardName());
+		}
 		player.getBoard().add(player.getHand().get(index));
 		boardImgsOpponent[player.getBoard().size() - 1].setVisible(true);
 		player.getHand().remove(index);
+		
+		for (MinionCard minion : player.getHand()) {
+			System.out.println("player utána: "+ minion.getCardName());
+		}
+		
 		refreshBoardImages(player, boardImgsOpponent);
 		refreshMinionBars(player, opponentHandMinionBars);
 	}
@@ -109,9 +117,10 @@ public class GameTableController {
 		System.out.println("player: " + player.getName());
 		System.out.println("player2: " + player2.getName());
 			
-		player.getBoard().get(attacker).setHealthPoint(player.getBoard().get(attacker).getHealthPoint()-player2.getBoard().get(defender).getAttackPower());
-		player2.getBoard().get(defender).setHealthPoint(player2.getBoard().get(defender).getHealthPoint()- player.getBoard().get(attacker).getAttackPower());
+		player2.getBoard().get(attacker).setHealthPoint(player2.getBoard().get(attacker).getHealthPoint()-player.getBoard().get(defender).getAttackPower());
+		player.getBoard().get(defender).setHealthPoint(player.getBoard().get(defender).getHealthPoint()- player2.getBoard().get(attacker).getAttackPower());
 
+		
 		removeDeadMinionsFromTheBoard(player);
 		removeDeadMinionsFromTheBoard(player2);
 		
@@ -356,8 +365,15 @@ public class GameTableController {
 	}
 	@FXML
 	public void endTurnButton() {
+		for (MinionCard minion : c.getPlayer1().getHand()) {
+			System.out.println("player1 elõtte: "+ minion.getCardName());
+		}
+		for (MinionCard minion : c.getPlayer2().getHand()) {
+			System.out.println("player2 elõtte: "+ minion.getCardName());
+		}
 		
-		if (Integer.parseInt(client.getPlayer()) == 1 && c.getActualPlayer() == 0) {
+		
+		if (Integer.parseInt(client.getPlayer()) == 1 /*&& c.getActualPlayer() == 0*/) {
 
 			c.setActualPlayer(1);
 			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
@@ -366,69 +382,61 @@ public class GameTableController {
 			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
 
 			manaBar2.setText("Mana: " + c.getPlayer2().getActualMana() + " /" + c.getPlayer2().getMana());
-//			refreshTheHandImages(c.getPlayer2(), handImgs);
-//			for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
-//				c.getPlayer2().getBoard().get(i).setAttackNow(1);
-//			}
-//			refreshBoardRectangles(c.getPlayer2());
+
 			System.out.println("1!!!");
 			
-		}else
-		if (Integer.parseInt(client.getPlayer()) == 1 && c.getActualPlayer() == 1) {
-			c.setActualPlayer(0);
+		}
+//		else
+//		if (Integer.parseInt(client.getPlayer()) == 1 && c.getActualPlayer() == 1) {
+//			c.setActualPlayer(0);
+//			c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
+//			c.getPlayer1().getDeck().remove(0);
+//			c.getPlayer1().setMana(c.getPlayer1().getMana() + 1);
+//			c.getPlayer1().setActualMana(c.getPlayer1().getMana());
+//
+//			manaBar2.setText("Mana: " + c.getPlayer1().getActualMana() + " /" + c.getPlayer1().getMana());
+//
+//			System.out.println("2!!!");
+//		}
+		
+		
+		if (Integer.parseInt(client.getPlayer()) == 2 /*&& c.getActualPlayer() == 0*/) {
+
+			c.setActualPlayer(1);
 			c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
 			c.getPlayer1().getDeck().remove(0);
 			c.getPlayer1().setMana(c.getPlayer1().getMana() + 1);
 			c.getPlayer1().setActualMana(c.getPlayer1().getMana());
 
 			manaBar2.setText("Mana: " + c.getPlayer1().getActualMana() + " /" + c.getPlayer1().getMana());
-//			refreshTheHandImages(c.getPlayer1(), handImgs);
-//			for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
-//				c.getPlayer1().getBoard().get(i).setAttackNow(1);
-//			}
-//			refreshBoardRectangles(c.getPlayer1());
-			System.out.println("2!!!");
-		}
-		
-		
-		if (Integer.parseInt(client.getPlayer()) == 2 && c.getActualPlayer() == 0) {
 
-			c.setActualPlayer(1);
-			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
-			c.getPlayer2().getDeck().remove(0);
-			c.getPlayer2().setMana(c.getPlayer2().getMana() + 1);
-			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
-
-			manaBar2.setText("Mana: " + c.getPlayer2().getActualMana() + " /" + c.getPlayer2().getMana());
-//			refreshTheHandImages(c.getPlayer2(), handImgs);
-//			for (int i = 0; i < c.getPlayer2().getBoard().size(); i++) {
-//				c.getPlayer2().getBoard().get(i).setAttackNow(1);
-//			}
-//			refreshBoardRectangles(c.getPlayer2());
 			System.out.println("3!!!");
 		}
-		else
-
-		if (Integer.parseInt(client.getPlayer()) == 2 && c.getActualPlayer() == 1) {
-			c.setActualPlayer(0);
-			c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
-			c.getPlayer1().getDeck().remove(0);
-			c.getPlayer1().setMana(c.getPlayer1().getMana() + 1);
-			c.getPlayer1().setActualMana(c.getPlayer1().getMana());
-
-			manaBar1.setText("Mana: " + c.getPlayer1().getActualMana() + " /" + c.getPlayer1().getMana());
-//			refreshTheHandImages(c.getPlayer1(), handImgs);
-//			for (int i = 0; i < c.getPlayer1().getBoard().size(); i++) {
-//				c.getPlayer1().getBoard().get(i).setAttackNow(1);
-//			}
-//			refreshBoardRectangles(c.getPlayer1());
-			System.out.println("4!!!");
+//		else
+//
+//		if (Integer.parseInt(client.getPlayer()) == 2 && c.getActualPlayer() == 1) {
+//			c.setActualPlayer(0);
+//			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
+//			c.getPlayer2().getDeck().remove(0);
+//			c.getPlayer2().setMana(c.getPlayer2().getMana() + 1);
+//			c.getPlayer2().setActualMana(c.getPlayer1().getMana());
+//
+//			manaBar1.setText("Mana: " + c.getPlayer2().getActualMana() + " /" + c.getPlayer2().getMana());
+//
+//			System.out.println("4!!!");
+//		}
+		
+		for (MinionCard minion : c.getPlayer1().getHand()) {
+			System.out.println("player1 utána: "+ minion.getCardName());
+		}
+		for (MinionCard minion : c.getPlayer2().getHand()) {
+			System.out.println("player2 utána: "+ minion.getCardName());
 		}
 		
-		
 		if(Integer.parseInt(client.getPlayer())==1){
-		sender.setMassage("ENDTURN" + " | " + "1" + " | ");
-		}else{
+			sender.setMassage("ENDTURN" + " | " + "1" + " | ");
+		}
+		else{
 			sender.setMassage("ENDTURN" + " | " + "2" + " | ");
 		}
 //		sender.setMassage("ENDTURN");

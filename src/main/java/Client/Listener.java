@@ -45,7 +45,9 @@ public class Listener extends Thread {
 		               
 		               if(Integer.parseInt(result[4]) == 1){
 		            	   player = GameTableController.c.getPlayer1();
-		               }else{player = GameTableController.c.getPlayer2();}
+		               }
+		               else{
+		            	   player = GameTableController.c.getPlayer2();}
 		               }
 		          
 		               switch(result[2]){

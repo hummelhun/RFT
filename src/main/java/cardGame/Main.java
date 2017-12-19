@@ -23,7 +23,7 @@ public class Main extends Application{
 	
 	public Stage primaryStage;
 	public BorderPane mainMenu;
-	public static Client client = new Client("127.0.0.1", 8005);
+	public static Client client = new Client("54.93.252.131", 8005);
 	Sender sender = new Sender();
 	Listener listener = new Listener();
 	public static GameTableController controller;

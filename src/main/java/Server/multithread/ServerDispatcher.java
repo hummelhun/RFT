@@ -11,9 +11,10 @@ public class ServerDispatcher extends Thread {
     
     public synchronized void addClient(ClientInfo aClientInfo)
     {
+    	if(playerN<0){playerN=0;}
     	String message ="";
         mClients.add(aClientInfo);
-        message = "PLAYER | " + (playerN); 
+        message = "PLAYER | " + (playerN+1); 
         ClientInfo clientInfo = (ClientInfo) mClients.get(playerN);
         sendMessageToPlayer(message, clientInfo);
         playerN++;
@@ -27,6 +28,7 @@ public class ServerDispatcher extends Thread {
            mClients.removeElementAt(clientIndex);
         
         System.out.println("Client Disconnected");
+        playerN--;
     }
  
     public synchronized void dispatchMessage(ClientInfo aClientInfo, String aMessage)

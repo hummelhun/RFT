@@ -39,7 +39,7 @@ public class ServerMain {
 	            		connection = 1;
 	            		playerN = 1;
 	            	}
-	            	while(playerN == 2){ if (playerN<=1)break; System.out.println("que");};
+	            	
 	            	System.out.println("Waiting for players!");
 	                Socket socket = serverSocket.accept();
 	                ClientInfo clientInfo = new ClientInfo();
@@ -56,7 +56,7 @@ public class ServerMain {
 	                serverDispatcher.addClient(clientInfo);
 	                System.out.println("player num: " + playerN);
 	                System.out.println("Client connected on socket!");
-	                
+	                while(playerN == 2 && connection == 1){ if (playerN<=1)break; };
 	                if(playerN <2){
 	                playerN++;
 	                }

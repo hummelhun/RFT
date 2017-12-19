@@ -63,7 +63,8 @@ public class GameTableController {
 			
 			refreshTheHandImages(player, handImgs);
 			refreshBoardImages(player, boardImgs);
-			refreshMinionBars(player, ownHandMinionBars);				
+			refreshBoardRectangles(player);
+			refreshMinionBars(player, ownHandMinionBars);
 		}
 		if(Integer.parseInt(client.getPlayer())==1){
 			sender.setMassage("PUT" + " | " + "1" + " | " + index);
@@ -74,16 +75,10 @@ public class GameTableController {
 	}
 	
 	public void putCardToTheBoard(Player player, int index) {
-		for (MinionCard minion : player.getHand()) {
-			System.out.println("player elõtte: "+ minion.getCardName());
-		}
+ 
 		player.getBoard().add(player.getHand().get(index));
 		boardImgsOpponent[player.getBoard().size() - 1].setVisible(true);
 		player.getHand().remove(index);
-		
-		for (MinionCard minion : player.getHand()) {
-			System.out.println("player utána: "+ minion.getCardName());
-		}
 		
 		refreshBoardImages(player, boardImgsOpponent);
 		refreshMinionBars(player, opponentHandMinionBars);
@@ -105,6 +100,7 @@ public class GameTableController {
 			refreshMinionBars(player2, opponentHandMinionBars);
 			
 			refreshBoardRectangles(player1);
+			
 		}
 		if(Integer.parseInt(client.getPlayer())==1){
 			sender.setMassage("ATTACK" + " | " + "1" + " | " + choose1 + " | " + boardIndex);
@@ -350,9 +346,10 @@ public class GameTableController {
 		else {
 			c.setActualPlayer(0);
 		}
-
-		player.getHand().add(player.getDeck().get(0));
-		player.getDeck().remove(0);
+		if (player.getHand().size()<5) {
+			player.getHand().add(player.getDeck().get(0));
+			player.getDeck().remove(0);
+		}
 		player.setMana(player.getMana() + 1);
 		player.setActualMana(player.getMana());
 		manaBar1.setText("Mana: " + player.getActualMana() + " /" + player.getMana());
@@ -364,20 +361,15 @@ public class GameTableController {
 		
 	}
 	@FXML
-	public void endTurnButton() {
-		for (MinionCard minion : c.getPlayer1().getHand()) {
-			System.out.println("player1 elõtte: "+ minion.getCardName());
-		}
-		for (MinionCard minion : c.getPlayer2().getHand()) {
-			System.out.println("player2 elõtte: "+ minion.getCardName());
-		}
-		
+	public void endTurnButton() {	
 		
 		if (Integer.parseInt(client.getPlayer()) == 1 /*&& c.getActualPlayer() == 0*/) {
 
 			c.setActualPlayer(1);
-			c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
-			c.getPlayer2().getDeck().remove(0);
+			if (c.getPlayer2().getHand().size()<5) {
+				c.getPlayer2().getHand().add(c.getPlayer2().getDeck().get(0));
+				c.getPlayer2().getDeck().remove(0);
+			}
 			c.getPlayer2().setMana(c.getPlayer2().getMana() + 1);
 			c.getPlayer2().setActualMana(c.getPlayer2().getMana());
 
@@ -403,8 +395,10 @@ public class GameTableController {
 		if (Integer.parseInt(client.getPlayer()) == 2 /*&& c.getActualPlayer() == 0*/) {
 
 			c.setActualPlayer(1);
+			if(c.getPlayer1().getHand().size()<5) {
 			c.getPlayer1().getHand().add(c.getPlayer1().getDeck().get(0));
 			c.getPlayer1().getDeck().remove(0);
+			}
 			c.getPlayer1().setMana(c.getPlayer1().getMana() + 1);
 			c.getPlayer1().setActualMana(c.getPlayer1().getMana());
 
@@ -425,21 +419,13 @@ public class GameTableController {
 //
 //			System.out.println("4!!!");
 //		}
-		
-		for (MinionCard minion : c.getPlayer1().getHand()) {
-			System.out.println("player1 utána: "+ minion.getCardName());
-		}
-		for (MinionCard minion : c.getPlayer2().getHand()) {
-			System.out.println("player2 utána: "+ minion.getCardName());
-		}
-		
+				
 		if(Integer.parseInt(client.getPlayer())==1){
 			sender.setMassage("ENDTURN" + " | " + "1" + " | ");
 		}
 		else{
 			sender.setMassage("ENDTURN" + " | " + "2" + " | ");
 		}
-//		sender.setMassage("ENDTURN");
 	}
 	
 	@FXML
@@ -593,6 +579,9 @@ public class GameTableController {
 				c.getPlayer1().getBoard().get(choose1).setAttackNow(0);
 				player2HealtText.setText("" + c.getPlayer2().getHealtPoint());
 				refreshBoardRectangles(c.getPlayer1());
+				if (c.getPlayer2().getHealtPoint()<=0) {
+					System.out.println("You Won!!");
+				}
 			}
 		}
 		if (Integer.parseInt(client.getPlayer()) == 2) {
@@ -601,6 +590,9 @@ public class GameTableController {
 				c.getPlayer2().getBoard().get(choose1).setAttackNow(0);
 				player2HealtText.setText("" + c.getPlayer1().getHealtPoint());
 				refreshBoardRectangles(c.getPlayer1());
+				if (c.getPlayer1().getHealtPoint()<=0) {
+					System.out.println("You Won!!");
+				}
 			}
 		}
 		if(Integer.parseInt(client.getPlayer())==1){
@@ -792,6 +784,7 @@ public class GameTableController {
 		ownHand5.setFitWidth(ownHand5.getFitWidth()-100);
 	}
 	
+
 	public void SetMain(Main main) {
 		
 	}

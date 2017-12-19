@@ -33,31 +33,11 @@
             <Rectangle fx:id="boardRectangle6" arcHeight="5.0" arcWidth="5.0" fill="#2097ff00" height="140.0" layoutX="960.0" layoutY="430.0" stroke="#e10000" strokeType="INSIDE" strokeWidth="3.0" width="100.0" />
             <Button fx:id="startButton" layoutX="1310.0" layoutY="845.0" mnemonicParsing="false" onAction="#startGame" prefHeight="55.0" prefWidth="130.0" text="Start" />
             <ImageView fx:id="heroFace" fitHeight="200.0" fitWidth="210.0" layoutX="650.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="ownHand4" fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand4" onMouseEntered="#feltolOH4" onMouseExited="#letolOH4" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownHand3" fitHeight="140.0" fitWidth="120.0" layoutX="583.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand3" onMouseEntered="#feltolOH3" onMouseExited="#letolOH3" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownHand1" fitHeight="140.0" fitWidth="120.0" layoutX="253.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand1" onMouseEntered="#feltolOH1" onMouseExited="#letolOH1" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownHand2" fitHeight="140.0" fitWidth="120.0" layoutX="418.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand2" onMouseEntered="#feltolOH2" onMouseExited="#letolOH2" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownHand5" fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand5" onMouseEntered="#feltolOH5" onMouseExited="#letolOH5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="ownHand4" fitHeight="140.0" fitWidth="120.0" layoutX="748.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand4" onMouseEntered="#feltolOH4" onMouseExited="#letolOH4" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownHand3" fitHeight="140.0" fitWidth="120.0" layoutX="583.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand3" onMouseEntered="#feltolOH3" onMouseExited="#letolOH3" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownHand1" fitHeight="140.0" fitWidth="120.0" layoutX="253.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand1" onMouseEntered="#feltolOH1" onMouseExited="#letolOH1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownHand2" fitHeight="140.0" fitWidth="120.0" layoutX="418.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand2" onMouseEntered="#feltolOH2" onMouseExited="#letolOH2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownHand5" fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="816.0" onMouseClicked="#clickOnOwnHand5" onMouseEntered="#feltolOH5" onMouseExited="#letolOH5" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="913.0" layoutY="-56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
@@ -84,66 +64,18 @@
                </image>
             </ImageView>
             <ImageView fx:id="opponentHeroFace" fitHeight="200.0" fitWidth="210.0" layoutX="650.0" layoutY="89.0" onMouseClicked="#clickOnOpponentFace" pickOnBounds="true" preserveRatio="true" />
-            <ImageView fx:id="ownBoard5" fitHeight="140.0" fitWidth="100.0" layoutX="830.0" layoutY="430.0" onMouseClicked="#clickOnBoard5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownBoard3" fitHeight="140.0" fitWidth="100.0" layoutX="570.0" layoutY="430.0" onMouseClicked="#clickOnBoard3" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownBoard6" fitHeight="140.0" fitWidth="100.0" layoutX="960.0" layoutY="430.0" onMouseClicked="#clickOnBoard6" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownBoard1" fitHeight="140.0" fitWidth="100.0" layoutX="310.0" layoutY="430.0" onMouseClicked="#clickOnBoard1" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownBoard4" fitHeight="140.0" fitWidth="100.0" layoutX="700.0" layoutY="430.0" onMouseClicked="#clickOnBoard4" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="ownBoard2" fitHeight="140.0" fitWidth="100.0" layoutX="440.0" layoutY="430.0" onMouseClicked="#clickOnBoard2" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="opponentBoard4" fitHeight="140.0" fitWidth="100.0" layoutX="700.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard4" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="opponentBoard5" fitHeight="140.0" fitWidth="100.0" layoutX="830.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard5" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="opponentBoard1" fitHeight="140.0" fitWidth="100.0" layoutX="310.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard1" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="opponentBoard2" fitHeight="140.0" fitWidth="100.0" layoutX="440.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard2" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="opponentBoard3" fitHeight="140.0" fitWidth="100.0" layoutX="570.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard3" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="opponentBoard6" fitHeight="140.0" fitWidth="100.0" layoutX="960.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard6" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="cardback_0.png" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="ownBoard5" fitHeight="140.0" fitWidth="100.0" layoutX="830.0" layoutY="430.0" onMouseClicked="#clickOnBoard5" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownBoard3" fitHeight="140.0" fitWidth="100.0" layoutX="570.0" layoutY="430.0" onMouseClicked="#clickOnBoard3" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownBoard6" fitHeight="140.0" fitWidth="100.0" layoutX="960.0" layoutY="430.0" onMouseClicked="#clickOnBoard6" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownBoard1" fitHeight="140.0" fitWidth="100.0" layoutX="310.0" layoutY="430.0" onMouseClicked="#clickOnBoard1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownBoard4" fitHeight="140.0" fitWidth="100.0" layoutX="700.0" layoutY="430.0" onMouseClicked="#clickOnBoard4" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="ownBoard2" fitHeight="140.0" fitWidth="100.0" layoutX="440.0" layoutY="430.0" onMouseClicked="#clickOnBoard2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="opponentBoard4" fitHeight="140.0" fitWidth="100.0" layoutX="700.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard4" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="opponentBoard5" fitHeight="140.0" fitWidth="100.0" layoutX="830.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard5" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="opponentBoard1" fitHeight="140.0" fitWidth="100.0" layoutX="310.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard1" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="opponentBoard2" fitHeight="140.0" fitWidth="100.0" layoutX="440.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard2" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="opponentBoard3" fitHeight="140.0" fitWidth="100.0" layoutX="570.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard3" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="opponentBoard6" fitHeight="140.0" fitWidth="100.0" layoutX="960.0" layoutY="275.0" onMouseClicked="#clickOnOpponentBoard6" pickOnBounds="true" preserveRatio="true" />
             <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="1155.0" layoutY="465.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="cardback_0.png" />
@@ -154,82 +86,82 @@
                   <Image url="cardback_0.png" />
                </image>
             </ImageView>
-            <Text fx:id="ownDeckCounter" fill="#edff00" layoutX="1293.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Own CC" wrappingWidth="100.0" />
-            <Text fx:id="player1HealtText" fill="WHITE" layoutX="755.0" layoutY="730.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OwnHP" wrappingWidth="100.0">
+            <Text fx:id="ownDeckCounter" fill="#edff00" layoutX="1293.0" layoutY="542.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
+            <Text fx:id="player1HealtText" fill="WHITE" layoutX="755.0" layoutY="730.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Text>
-            <Text fx:id="player2HealtText" fill="WHITE" layoutX="757.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OpponentHP" wrappingWidth="198.0">
+            <Text fx:id="player2HealtText" fill="WHITE" layoutX="757.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="198.0">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font></Text>
-            <Text fx:id="ownDeckCounter2" fill="#edff00" layoutX="1281.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Opponent CC" wrappingWidth="100.0" />
+            <Text fx:id="ownDeckCounter2" fill="#edff00" layoutX="1281.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="100.0" />
             <Button layoutX="1090.0" layoutY="379.0" mnemonicParsing="false" onAction="#endTurnButton" prefHeight="63.0" prefWidth="130.0" text="End Turn">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Button>
-            <Text fx:id="manaBar1" fill="#0035ff" layoutX="1100.0" layoutY="829.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana/Mana" wrappingWidth="130.0">
+            <Text fx:id="manaBar1" fill="#0035ff" layoutX="1100.0" layoutY="829.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.0">
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <Text fx:id="manaBar2" fill="#0035ff" layoutX="1090.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mana/Mana" wrappingWidth="130.0">
+            <Text fx:id="manaBar2" fill="#0035ff" layoutX="1090.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.0">
                <font>
                   <Font size="18.0" />
                </font></Text>
-            <Text fx:id="playerCode" fill="#edff00" layoutX="30.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="130.0">
+            <Text fx:id="playerCode" fill="#edff00" layoutX="30.0" layoutY="563.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.0">
                <font>
                   <Font size="65.0" />
                </font>
             </Text>
-            <Text fx:id="opponentHandMinionBar1" fill="#edff00" layoutX="310.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="114.0206298828125">
+            <Text fx:id="opponentHandMinionBar1" fill="#edff00" layoutX="310.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="114.0206298828125">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="opponentHandMinionBar2" fill="#edff00" layoutX="440.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="114.0206298828125">
+            <Text fx:id="opponentHandMinionBar2" fill="#edff00" layoutX="440.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="114.0206298828125">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="opponentHandMinionBar3" fill="#edff00" layoutX="570.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="114.0206298828125">
+            <Text fx:id="opponentHandMinionBar3" fill="#edff00" layoutX="570.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="114.0206298828125">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="opponentHandMinionBar4" fill="#edff00" layoutX="700.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="121.0">
+            <Text fx:id="opponentHandMinionBar4" fill="#edff00" layoutX="700.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="opponentHandMinionBar5" fill="#edff00" layoutX="830.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="114.0206298828125">
+            <Text fx:id="opponentHandMinionBar5" fill="#edff00" layoutX="830.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="114.0206298828125">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="opponentHandMinionBar6" fill="#edff00" layoutX="960.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="121.0">
+            <Text fx:id="opponentHandMinionBar6" fill="#edff00" layoutX="960.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="ownHandMinionBar1" fill="#edff00" layoutX="310.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="130.0">
+            <Text fx:id="ownHandMinionBar1" fill="#edff00" layoutX="310.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="ownHandMinionBar2" fill="#edff00" layoutX="440.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="121.0">
+            <Text fx:id="ownHandMinionBar2" fill="#edff00" layoutX="440.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="ownHandMinionBar3" fill="#edff00" layoutX="570.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="121.0">
+            <Text fx:id="ownHandMinionBar3" fill="#edff00" layoutX="570.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="ownHandMinionBar4" fill="#edff00" layoutX="710.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="121.0">
+            <Text fx:id="ownHandMinionBar4" fill="#edff00" layoutX="710.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="ownHandMinionBar5" fill="#edff00" layoutX="840.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="121.0">
+            <Text fx:id="ownHandMinionBar5" fill="#edff00" layoutX="840.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="121.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="ownHandMinionBar6" fill="#edff00" layoutX="970.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="114.0206298828125">
+            <Text fx:id="ownHandMinionBar6" fill="#edff00" layoutX="970.0" layoutY="595.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="114.0206298828125">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font></Text>
-            <Text fx:id="timeElapse" fill="#edff00" layoutX="1303.0" layoutY="755.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="130.0" />
+            <Text fx:id="timeElapse" fill="#edff00" layoutX="1303.0" layoutY="755.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="130.0" />
          </children></Pane>
    </children>
 </AnchorPane>
